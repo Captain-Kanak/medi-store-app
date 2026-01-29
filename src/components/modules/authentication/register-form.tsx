@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,6 +17,18 @@ import {
 import { Input } from "@/components/ui/input";
 
 export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
+  // const handleRegister = async () => {
+  //   const data = authClient.signIn.social({
+  //     provider: "google",
+  //   });
+  // };
+
+  // const handleGoogleLogin = async () => {
+  //   const data = authClient.signIn.social({
+  //     provider: "google",
+  //   });
+  // };
+
   return (
     <Card {...props}>
       <CardHeader>
