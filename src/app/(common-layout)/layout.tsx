@@ -8,7 +8,7 @@ export default function CommonLayout({
   return (
     <>
       <Navbar />
-      {children}
+      <div className="container mx-auto">{children}</div>
     </>
   );
 }
