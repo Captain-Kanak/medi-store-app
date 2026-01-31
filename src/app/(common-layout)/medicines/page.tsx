@@ -1,5 +1,5 @@
+import { MedicineList } from "@/components/modules/medicines/MedicineList";
 import { medicineService } from "@/services/medicine.service";
-import { MedicineList } from "@/components/MedicineList";
 
 export default async function MedicinesPage() {
   const medicines = await medicineService.getMedicines();

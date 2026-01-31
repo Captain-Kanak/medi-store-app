@@ -3,6 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, UploadCloud, ShieldCheck, Zap } from "lucide-react";
+import Link from "next/link";
 
 export default function BannerSection() {
   return (
@@ -12,9 +13,7 @@ export default function BannerSection() {
       border border-slate-200 dark:border-slate-800
       text-slate-900 dark:text-white transition-colors duration-300"
     >
-      {/* --- Adaptive Background Elements --- */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        {/* Orbs: Soft blue for light, Deep blue for dark */}
         <div
           className="absolute -top-[10%] -left-[10%] w-[40%] h-[60%] rounded-full 
           bg-blue-400/20 dark:bg-blue-600/30 blur-[120px] animate-pulse"
@@ -24,7 +23,6 @@ export default function BannerSection() {
           bg-cyan-300/20 dark:bg-cyan-500/20 blur-[120px]"
         />
 
-        {/* Grid Pattern: Dark lines for light mode, Light lines for dark mode */}
         <div
           className="absolute inset-0 opacity-[0.05] dark:opacity-10 
           bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)]"
@@ -32,7 +30,6 @@ export default function BannerSection() {
       </div>
 
       <div className="relative z-10 flex h-full flex-col lg:flex-row items-center justify-between px-8 py-16 md:px-16 lg:gap-12">
-        {/* --- Left Content --- */}
         <div className="flex flex-col justify-center text-center lg:text-left lg:w-3/5">
           <Badge
             className="w-fit mx-auto lg:mx-0 mb-6 
@@ -62,12 +59,15 @@ export default function BannerSection() {
 
           <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
             <Button
+              asChild
               size="lg"
-              className="h-14 px-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/20"
+              className="h-14 px-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/20 cursor-pointer"
             >
-              Browse Medicines <ArrowRight className="ml-2 w-5 h-5" />
+              <Link href={"/medicines"}>
+                Browse Medicines <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
             </Button>
-            <Button
+            {/* <Button
               size="lg"
               variant="outline"
               className="h-14 px-8 rounded-full 
@@ -78,7 +78,7 @@ export default function BannerSection() {
             >
               <UploadCloud className="mr-2 w-5 h-5" />
               Upload Prescription
-            </Button>
+            </Button> */}
           </div>
 
           <div className="mt-8 flex items-center justify-center lg:justify-start gap-6 text-sm">
