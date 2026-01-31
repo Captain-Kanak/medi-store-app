@@ -1,8 +1,10 @@
 import { MedicineList } from "@/components/modules/medicines/MedicineList";
 import { medicineService } from "@/services/medicine.service";
 
+export const dynamic = "force-dynamic";
+
 export default async function MedicinesPage() {
-  const medicines = await medicineService.getMedicines();
+  const { data: medicines } = await medicineService.getMedicines();
 
   return (
     <div className="py-10">

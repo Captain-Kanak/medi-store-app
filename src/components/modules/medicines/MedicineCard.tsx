@@ -3,10 +3,11 @@
 import { ShoppingCart, Pill, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Medicine } from "@/types";
 
 interface MedicineCardProps {
-  medicine: any;
-  onAddToCart?: (medicine: any) => void;
+  medicine: Medicine;
+  onAddToCart?: (medicine: Medicine) => void;
 }
 
 export function MedicineCard({ medicine, onAddToCart }: MedicineCardProps) {

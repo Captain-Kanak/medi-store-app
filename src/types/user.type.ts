@@ -1,13 +1,18 @@
+import { Medicine } from "./medicine.type";
+
 export interface User {
   id: string;
   name: string;
   email: string;
   emailVerified: boolean;
   image: string;
-  role: string;
+  role: UserRoles;
   phone?: string;
   address?: string;
   isBlocked: boolean;
+  medicines?: Medicine[];
+  orders?: any[];
+  reviews?: any[];
   createdAt: string;
   updatedAt: string;
 }

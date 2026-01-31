@@ -1,20 +1,23 @@
 import { env } from "@/env";
+import { ApiResponse, Medicine } from "@/types";
 
 export const medicineService = {
-  getMedicines: async function () {
+  getMedicines: async function (): Promise<ApiResponse<Medicine[]>> {
     try {
-      const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/medicines`);
-
-      if (!res.ok) {
-        throw new Error(`Failed to fetch medicines: ${res.statusText}`);
-      }
+      const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/medicines`, {
+        cache: "no-store",
+      });
 
       const data = await res.json();
 
-      return data.data;
+      if (!data.success) {
+        return { data: null, error: { message: data.message } };
+      }
+
+      return { data: data.data, error: null };
     } catch (error) {
       console.error("Medicine Service Error:", error);
-      return [];
+      return { data: null, error: { message: "Failed to fetch medicines" } };
     }
   },
 };
