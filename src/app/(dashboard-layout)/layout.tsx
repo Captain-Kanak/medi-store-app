@@ -27,8 +27,8 @@ export default function DashboardLayout({
 }>) {
   const AuthUser: UserType = {
     name: "John Doe",
-    // role: "ADMIN",
-    role: "SELLER",
+    role: "ADMIN",
+    // role: "SELLER",
   };
 
   return (
@@ -60,15 +60,11 @@ export default function DashboardLayout({
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          {/* {AuthUser.role === "ADMIN"
+          {AuthUser.role === "ADMIN"
             ? admin
             : AuthUser.role === "SELLER"
               ? seller
-              : customer} */}
-
-          {admin}
-          {seller}
-          {customer}
+              : customer}
         </div>
       </SidebarInset>
     </SidebarProvider>

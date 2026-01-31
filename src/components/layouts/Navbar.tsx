@@ -75,9 +75,6 @@ const Navbar = ({
   },
   className,
 }: NavbarProps) => {
-  // const session = authClient.useSession();
-  // const user = session.data?.user;
-
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto">
