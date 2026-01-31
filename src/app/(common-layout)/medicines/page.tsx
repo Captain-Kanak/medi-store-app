@@ -1,20 +1,14 @@
-export default function MedicinesPage() {
-  // const getMedicines = async () => {
-  //   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/medicines`);
-  //   const medicines = await res.json();
+import { medicineService } from "@/services/medicine.service";
+import { MedicineList } from "@/components/MedicineList";
 
-  //   console.log(medicines.data);
-
-  //   // return medicines.data.data;
-  // };
-
-  // console.log(getMedicines());
-
-  // getMedicines();
+export default async function MedicinesPage() {
+  const medicines = await medicineService.getMedicines();
 
   return (
-    <div>
-      <h1>Medicines</h1>
+    <div className="py-10">
+      <h2 className="text-3xl font-bold mb-8">Available Medicines</h2>
+
+      <MedicineList initialMedicines={medicines} />
     </div>
   );
 }
