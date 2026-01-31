@@ -15,6 +15,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
   // const handleRegister = async () => {
@@ -78,7 +79,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                   Sign up with Google
                 </Button>
                 <FieldDescription className="px-6 text-center">
-                  Already have an account? <a href="#">Sign in</a>
+                  Already have an account? <Link href="#">Sign in</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>

@@ -14,15 +14,26 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { UserType } from "@/types";
 
 export default function DashboardLayout({
-  children,
+  admin,
+  seller,
+  customer,
 }: Readonly<{
-  children: React.ReactNode;
+  admin: React.ReactNode;
+  seller: React.ReactNode;
+  customer: React.ReactNode;
 }>) {
+  const AuthUser: UserType = {
+    name: "John Doe",
+    // role: "ADMIN",
+    role: "SELLER",
+  };
+
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar user={AuthUser} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
@@ -48,7 +59,17 @@ export default function DashboardLayout({
             <ModeToggle />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4">{children}</div>
+        <div className="flex flex-1 flex-col gap-4 p-4">
+          {/* {AuthUser.role === "ADMIN"
+            ? admin
+            : AuthUser.role === "SELLER"
+              ? seller
+              : customer} */}
+
+          {admin}
+          {seller}
+          {customer}
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

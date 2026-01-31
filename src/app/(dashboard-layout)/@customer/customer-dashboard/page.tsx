@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-export default function Dashboard() {
+export default function CustomerDashboard() {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h1>Customer Dashboard</h1>
 
       <Button asChild className="cursor-pointer">
         <Link href={"/"}>Home</Link>

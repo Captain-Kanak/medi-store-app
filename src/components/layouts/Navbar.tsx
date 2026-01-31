@@ -20,6 +20,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { ModeToggle } from "./ModeToggle";
+import { authClient } from "@/lib/auth-client";
 
 interface MenuItem {
   title: string;
@@ -74,6 +75,9 @@ const Navbar = ({
   },
   className,
 }: NavbarProps) => {
+  // const session = authClient.useSession();
+  // const user = session.data?.user;
+
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto">
@@ -84,7 +88,7 @@ const Navbar = ({
             <Link href={logo.url} className="flex items-center gap-2">
               <Image
                 src={logo.src}
-                className="max-h-12 dark:invert"
+                className="dark:invert"
                 width={48}
                 height={48}
                 alt={logo.alt}
