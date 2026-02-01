@@ -7,11 +7,6 @@ import { Medicine } from "@/types";
 import Link from "next/link";
 import { Eye, ChevronRight } from "lucide-react";
 
-interface MedicineCardProps {
-  medicine: Medicine;
-  onAddToCart?: (medicine: Medicine) => void;
-}
-
 export function MedicineCard({ medicine }: { medicine: Medicine }) {
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-2xl border bg-white dark:bg-slate-900/50 transition-all hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1">
@@ -68,16 +63,17 @@ export function MedicineCard({ medicine }: { medicine: Medicine }) {
         </div>
 
         {/* Action Button: Redirects to Details Page */}
-        <Link href={`/medicines/${medicine.id}`} className="mt-6">
-          <Button
-            variant="outline"
-            className="w-full rounded-xl border-blue-200 dark:border-slate-700 hover:bg-blue-600 hover:text-white transition-all group/btn"
-          >
+        <Button
+          asChild
+          variant="outline"
+          className="w-full rounded-xl border-blue-200 dark:border-slate-700 hover:bg-blue-600 hover:text-white transition-all group/btn cursor-pointer"
+        >
+          <Link href={`/medicines/${medicine.id}`} className="mt-6">
             <Eye className="mr-2 h-4 w-4" />
             View Details
             <ChevronRight className="ml-auto h-4 w-4 opacity-0 group-hover/btn:opacity-100 transition-all -translate-x-2 group-hover/btn:translate-x-0" />
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
     </div>
   );

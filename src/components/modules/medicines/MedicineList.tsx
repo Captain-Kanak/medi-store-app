@@ -8,20 +8,10 @@ export function MedicineList({
 }: {
   initialMedicines: Medicine[] | null;
 }) {
-  const handleAddToCart = (medicine: Medicine) => {
-    console.log("Added to cart:", medicine.name);
-    // You can add your LocalStorage or Context logic here later
-    alert(`${medicine.name} added to cart!`);
-  };
-
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {initialMedicines?.map((medicine) => (
-        <MedicineCard
-          key={medicine.id}
-          medicine={medicine}
-          onAddToCart={handleAddToCart}
-        />
+        <MedicineCard key={medicine.id} medicine={medicine} />
       ))}
     </div>
   );

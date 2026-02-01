@@ -67,4 +67,30 @@ export const medicineService = {
       return { data: null, error: { message: "Failed to fetch medicines" } };
     }
   },
+  getMedicineById: async function (id: string): Promise<ApiResponse<Medicine>> {
+    try {
+      const res = await fetch(`${API_URL}/medicines/${id}`);
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        return {
+          data: null,
+          error: {
+            message: errorData.message || `Server Error: ${res.status}`,
+          },
+        };
+      }
+
+      const data = await res.json();
+
+      if (!data.success) {
+        return { data: null, error: { message: data.message } };
+      }
+
+      return { data: data.data, error: null };
+    } catch (error) {
+      console.error("Medicine Service Error:", error);
+      return { data: null, error: { message: "Failed to fetch medicines" } };
+    }
+  },
 };
