@@ -16,10 +16,10 @@ export function MedicineList({
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {initialMedicines?.map((item) => (
+      {initialMedicines?.map((medicine) => (
         <MedicineCard
-          key={item.id}
-          medicine={item}
+          key={medicine.id}
+          medicine={medicine}
           onAddToCart={handleAddToCart}
         />
       ))}
