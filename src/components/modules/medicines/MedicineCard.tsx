@@ -1,83 +1,83 @@
 "use client";
 
-import { ShoppingCart, Pill, AlertCircle } from "lucide-react";
+import { Pill } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Medicine } from "@/types";
+import Link from "next/link";
+import { Eye, ChevronRight } from "lucide-react";
 
 interface MedicineCardProps {
   medicine: Medicine;
   onAddToCart?: (medicine: Medicine) => void;
 }
 
-export function MedicineCard({ medicine, onAddToCart }: MedicineCardProps) {
-  const isLowStock = medicine.stock > 0 && medicine.stock < 10;
-  const isOutOfStock = medicine.stock === 0;
-
+export function MedicineCard({ medicine }: { medicine: Medicine }) {
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md">
-      {/* Image Section */}
-      <div className="aspect-square overflow-hidden bg-muted">
-        <img
-          src={medicine.image || "/placeholder-medicine.jpg"}
-          alt={medicine.name}
-          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
-        {isOutOfStock && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/60 text-white font-bold">
-            Out of Stock
-          </div>
-        )}
-      </div>
+    <div className="group relative flex flex-col overflow-hidden rounded-2xl border bg-white dark:bg-slate-900/50 transition-all hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1">
+      {/* Visual Placeholder Section */}
+      <div className="relative aspect-4/3 overflow-hidden bg-slate-100 dark:bg-slate-800">
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#3b82f6_1px,transparent_1px)]" />
 
-      {/* Content Section */}
-      <div className="flex flex-1 flex-col p-4">
-        <div className="mb-2 flex items-center justify-between">
-          <Badge
-            variant="outline"
-            className="text-[10px] uppercase tracking-wider"
-          >
-            {medicine.brand}
-          </Badge>
-          {isLowStock && (
-            <Badge
-              variant="destructive"
-              className="flex items-center gap-1 text-[10px]"
-            >
-              <AlertCircle size={10} /> Low Stock
-            </Badge>
-          )}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Pill
+            size={48}
+            strokeWidth={1}
+            className="text-slate-400 group-hover:text-blue-500 transition-colors"
+          />
         </div>
 
-        <h3 className="font-semibold text-lg leading-tight text-foreground line-clamp-1">
-          {medicine.name}
-        </h3>
-        <p className="mt-1 text-sm text-muted-foreground line-clamp-2 min-h-10">
+        <div className="absolute top-3 left-3">
+          <Badge className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md text-blue-600 border-none shadow-sm">
+            {medicine.brand}
+          </Badge>
+        </div>
+      </div>
+
+      <div className="flex flex-1 flex-col p-5">
+        <div className="flex justify-between items-start mb-2">
+          <h3 className="font-bold text-lg text-slate-900 dark:text-white line-clamp-1">
+            {medicine.name}
+          </h3>
+          <span className="text-lg font-black text-blue-600">
+            ${Number(medicine.price).toFixed(2)}
+          </span>
+        </div>
+
+        <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
           {medicine.description}
         </p>
 
-        <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
-          <Pill size={14} />
-          <span>Dosage: {medicine.dosage}</span>
-        </div>
-
-        {/* Pricing and Action */}
-        <div className="mt-auto pt-4 flex items-center justify-between">
-          <div>
-            <span className="text-2xl font-bold text-primary">
-              ${medicine.price.toFixed(2)}
+        <div className="mt-4 grid grid-cols-2 gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+          <div className="flex flex-col border-r border-slate-200 dark:border-slate-800">
+            <span>Dosage</span>
+            <span className="text-slate-700 dark:text-slate-200">
+              {medicine.dosage}
             </span>
           </div>
-          <Button
-            size="sm"
-            disabled={isOutOfStock}
-            onClick={() => onAddToCart?.(medicine)}
-            className="flex items-center gap-2 cursor-pointer"
-          >
-            <ShoppingCart size={16} />
-            Add
-          </Button>
+          <div className="flex flex-col pl-2">
+            <span>Stock</span>
+            <span
+              className={
+                medicine.stock > 0 ? "text-emerald-500" : "text-rose-500"
+              }
+            >
+              {medicine.stock > 0 ? `${medicine.stock} units` : "Out of Stock"}
+            </span>
+          </div>
         </div>
+
+        {/* Action Button: Redirects to Details Page */}
+        <Link href={`/medicines/${medicine.id}`} className="mt-6">
+          <Button
+            variant="outline"
+            className="w-full rounded-xl border-blue-200 dark:border-slate-700 hover:bg-blue-600 hover:text-white transition-all group/btn"
+          >
+            <Eye className="mr-2 h-4 w-4" />
+            View Details
+            <ChevronRight className="ml-auto h-4 w-4 opacity-0 group-hover/btn:opacity-100 transition-all -translate-x-2 group-hover/btn:translate-x-0" />
+          </Button>
+        </Link>
       </div>
     </div>
   );

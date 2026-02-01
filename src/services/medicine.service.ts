@@ -5,9 +5,8 @@ interface GetMedicinesParams {
   search?: string;
   page?: number;
   limit?: number;
-  price?: number;
-  sortBy?: string;
-  sortOrder?: string;
+  sortBy?: "price" | "name" | "createdAt" | "stock";
+  sortOrder?: "asc" | "desc";
   categoryId?: string;
 }
 
@@ -45,6 +44,16 @@ export const medicineService = {
       }
 
       const res = await fetch(url.toString(), config);
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        return {
+          data: null,
+          error: {
+            message: errorData.message || `Server Error: ${res.status}`,
+          },
+        };
+      }
 
       const data = await res.json();
 
