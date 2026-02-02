@@ -12,6 +12,15 @@ import {
   PackageCheck,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { Medicine } from "@/types";
+
+export async function generateStaticParams(): Promise<any> {
+  const { data: medicines } = await medicineService.getMedicines();
+
+  return medicines
+    ?.map((medicine: Medicine) => ({ slug: medicine.id }))
+    .splice(0, 12);
+}
 
 export default async function MedicineDetailsPage({
   params,
