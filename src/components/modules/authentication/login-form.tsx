@@ -21,7 +21,7 @@ import { authClient } from "@/lib/auth-client";
 export function LoginForm({
   className,
   ...props
-}: React.ComponentProps<"div">) {
+}: React.HTMLAttributes<HTMLDivElement>) {
   const handleGoogleLogin = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
