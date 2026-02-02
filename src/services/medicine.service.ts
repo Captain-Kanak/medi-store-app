@@ -1,7 +1,7 @@
 import { env } from "@/env";
 import { ApiResponse, Medicine } from "@/types";
 
-interface GetMedicinesParams {
+export interface GetMedicinesParams {
   search?: string;
   page?: number;
   limit?: number;
@@ -49,6 +49,7 @@ export const medicineService = {
         const errorData = await res.json().catch(() => ({}));
         return {
           data: null,
+          pagination: null,
           error: {
             message: errorData.message || `Server Error: ${res.status}`,
           },
@@ -58,13 +59,21 @@ export const medicineService = {
       const data = await res.json();
 
       if (!data.success) {
-        return { data: null, error: { message: data.message } };
+        return {
+          data: null,
+          pagination: null,
+          error: { message: data.message },
+        };
       }
 
-      return { data: data.data, error: null };
+      return { data: data.data, pagination: data.pagination, error: null };
     } catch (error) {
       console.error("Medicine Service Error:", error);
-      return { data: null, error: { message: "Failed to fetch medicines" } };
+      return {
+        data: null,
+        pagination: null,
+        error: { message: "Failed to fetch medicines" },
+      };
     }
   },
   getMedicineById: async function (id: string): Promise<ApiResponse<Medicine>> {
@@ -75,6 +84,7 @@ export const medicineService = {
         const errorData = await res.json().catch(() => ({}));
         return {
           data: null,
+          pagination: null,
           error: {
             message: errorData.message || `Server Error: ${res.status}`,
           },
@@ -84,13 +94,21 @@ export const medicineService = {
       const data = await res.json();
 
       if (!data.success) {
-        return { data: null, error: { message: data.message } };
+        return {
+          data: null,
+          pagination: null,
+          error: { message: data.message },
+        };
       }
 
-      return { data: data.data, error: null };
+      return { data: data.data, pagination: null, error: null };
     } catch (error) {
       console.error("Medicine Service Error:", error);
-      return { data: null, error: { message: "Failed to fetch medicines" } };
+      return {
+        data: null,
+        pagination: null,
+        error: { message: "Failed to fetch medicines" },
+      };
     }
   },
 };

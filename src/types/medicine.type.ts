@@ -25,5 +25,12 @@ export interface Medicine {
 
 export interface ApiResponse<T> {
   data: T | null;
+  pagination: {
+    limit: number;
+    offset: number;
+    total: number;
+    currentPage: number;
+    totalPage: number;
+  } | null;
   error: { message: string } | null;
 }
