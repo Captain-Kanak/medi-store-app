@@ -61,7 +61,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
     validators: { onSubmit: registerFormSchema },
     onSubmit: async ({ value }) => {
       setIsUploading(true);
-      const toastId = toast.loading("Creating your medical account...");
+      const toastId = toast.loading("Creating your account...");
       try {
         let imageUrl = "";
         if (value.imageFile) {
@@ -84,13 +84,29 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
         }
 
         toast.success("Welcome to the community!", { id: toastId });
-        // Optional: window.location.href = "/dashboard";
+        setIsUploading(false);
       } catch (err) {
         toast.error("An unexpected error occurred", { id: toastId });
         setIsUploading(false);
       }
     },
   });
+
+  const handleGoogleLogin = async () => {
+    try {
+      const data = await authClient.signIn.social({
+        provider: "google",
+        callbackURL: env.NEXT_PUBLIC_APP_URL,
+      });
+
+      if (!data) {
+        toast.error("Could not initiate Google login.");
+      }
+    } catch (error) {
+      toast.error("Social login failed. Please try again.");
+      console.error("Google Login Error:", error);
+    }
+  };
 
   return (
     <Card
@@ -99,7 +115,6 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
         props.className,
       )}
     >
-      {/* Fancy Top Progress/Gradient */}
       <div className="h-1.5 bg-linear-to-r from-blue-500 via-indigo-500 to-purple-600" />
 
       <CardHeader className="text-center pt-8 space-y-2">
@@ -123,7 +138,6 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
             form.handleSubmit();
           }}
         >
-          {/* --- Fancy Avatar Upload --- */}
           <div className="flex flex-col items-center justify-center group">
             <div className="relative">
               <div className="h-28 w-28 rounded-3xl rotate-3 group-hover:rotate-0 transition-transform duration-300 border-2 border-dashed border-blue-200 dark:border-slate-700 p-1 bg-white dark:bg-slate-900 overflow-hidden">
@@ -215,7 +229,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 group-focus-within/pass:text-blue-500 transition-colors" />
 
                     <Input
-                      type={showPassword ? "text" : "password"} // Dynamic type
+                      type={showPassword ? "text" : "password"}
                       className="pl-10 pr-10 h-11 bg-slate-50/50 dark:bg-slate-900/50 border-slate-200 focus:ring-blue-500 rounded-xl"
                       placeholder="••••••••"
                       value={field.state.value}
@@ -227,7 +241,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer outline-none"
-                      tabIndex={-1} // Prevents tab-key focus for better flow
+                      tabIndex={-1}
                     >
                       {showPassword ? (
                         <EyeOff className="h-4 w-4" />
@@ -256,7 +270,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
               <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Creating...
             </>
           ) : (
-            "Create Account"
+            "Register"
           )}
         </Button>
 
@@ -269,15 +283,13 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
         </div>
 
         <Button
+          onClick={() => handleGoogleLogin()}
           variant="outline"
-          className="w-full h-12 rounded-xl border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
-          onClick={() =>
-            authClient.signIn.social({ provider: "google", callbackURL: "/" })
-          }
+          className="w-full h-12 rounded-xl border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer"
         >
           <Mail className="mr-2 h-4 w-4 text-rose-500" />
           <span className="font-semibold text-slate-700 dark:text-slate-300">
-            Sign up with Google
+            Continue with Google
           </span>
         </Button>
       </CardFooter>

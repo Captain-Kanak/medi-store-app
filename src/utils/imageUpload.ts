@@ -1,4 +1,3 @@
-// utils/imageUpload.ts
 import { env } from "@/env";
 
 export const uploadImageToImgBB = async (

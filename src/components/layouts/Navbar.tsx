@@ -20,7 +20,6 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { ModeToggle } from "./ModeToggle";
-import { authClient } from "@/lib/auth-client";
 
 interface MenuItem {
   title: string;
@@ -76,7 +75,12 @@ const Navbar = ({
   className,
 }: NavbarProps) => {
   return (
-    <section className={cn("py-4", className)}>
+    <section
+      className={cn(
+        "py-3 sticky top-0 z-50 w-full border-b border-slate-200/60 bg-white/80 backdrop-blur-md dark:border-slate-800/60 dark:bg-slate-950/80",
+        className,
+      )}
+    >
       <div className="container mx-auto">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex">
