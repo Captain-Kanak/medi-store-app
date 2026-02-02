@@ -12,15 +12,6 @@ import {
   PackageCheck,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import { Medicine } from "@/types";
-
-export async function generateStaticParams(): Promise<any> {
-  const { data: medicines } = await medicineService.getMedicines();
-
-  return medicines
-    ?.map((medicine: Medicine) => ({ slug: medicine.id }))
-    .splice(0, 12);
-}
 
 export default async function MedicineDetailsPage({
   params,
@@ -39,9 +30,7 @@ export default async function MedicineDetailsPage({
   return (
     <div className="container mx-auto px-4 py-10">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-        {/* --- Left Column: Visual & Info (7 Cols) --- */}
         <div className="lg:col-span-7 space-y-8">
-          {/* Visual Placeholder */}
           <div className="relative aspect-video overflow-hidden rounded-3xl border bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)]" />
             <Pill size={120} strokeWidth={0.5} className="text-blue-500/50" />
@@ -91,7 +80,6 @@ export default async function MedicineDetailsPage({
           </div>
         </div>
 
-        {/* --- Right Column: Checkout Action (5 Cols) --- */}
         <div className="lg:col-span-5">
           <div className="sticky top-24 rounded-3xl border bg-white dark:bg-slate-900 p-8 shadow-xl shadow-blue-500/5 space-y-6">
             <div>

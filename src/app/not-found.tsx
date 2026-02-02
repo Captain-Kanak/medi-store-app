@@ -50,8 +50,8 @@ export default function NotFound() {
           </Button>
 
           <Button
-            variant="outline"
             asChild
+            variant="outline"
             className="h-12 px-8 border-slate-200 dark:border-slate-800 font-bold rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-900 w-full sm:w-auto"
           >
             <Link href="/medicines">

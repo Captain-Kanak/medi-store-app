@@ -5,7 +5,7 @@ export interface User {
   name: string;
   email: string;
   emailVerified: boolean;
-  image: string;
+  image: string | null | undefined;
   role: UserRoles;
   phone?: string;
   address?: string;

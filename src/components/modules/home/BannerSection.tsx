@@ -2,7 +2,8 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, UploadCloud, ShieldCheck, Zap } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function BannerSection() {
@@ -67,18 +68,6 @@ export default function BannerSection() {
                 Browse Medicines <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
-            {/* <Button
-              size="lg"
-              variant="outline"
-              className="h-14 px-8 rounded-full 
-                border-slate-300 dark:border-slate-700 
-                bg-white/50 dark:bg-slate-900/50 
-                backdrop-blur-md text-slate-900 dark:text-white 
-                hover:bg-slate-100 dark:hover:bg-slate-800 transition-all shadow-sm"
-            >
-              <UploadCloud className="mr-2 w-5 h-5" />
-              Upload Prescription
-            </Button> */}
           </div>
 
           <div className="mt-8 flex items-center justify-center lg:justify-start gap-6 text-sm">
@@ -109,11 +98,18 @@ export default function BannerSection() {
               className="w-full h-full rounded-3xl rotate-3 hover:rotate-0 transition-transform duration-500
                   bg-white dark:bg-slate-800/40 
                   backdrop-blur-xl border border-slate-200 dark:border-white/10 
-                  shadow-xl dark:shadow-2xl flex items-center justify-center"
+                  shadow-xl dark:shadow-2xl flex flex-col gap-8 items-center justify-center"
             >
               <span className="text-slate-400 dark:text-slate-500 italic font-medium">
                 Authentic Meds
               </span>
+              <Image
+                src={"/banner.webp"}
+                height={300}
+                width={320}
+                alt="banner"
+                className="rounded-3xl"
+              />
             </div>
 
             {/* Floating "Fast Delivery" card */}
