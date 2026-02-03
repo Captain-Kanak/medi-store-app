@@ -56,7 +56,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
           email: value.email,
           password: value.password,
           rememberMe: true,
-          callbackURL: `${env.NEXT_PUBLIC_APP_URL}/?auth_success=true`,
+          callbackURL: `${env.NEXT_PUBLIC_APP_URL}/?auth_credentials=true`,
         });
 
         if (error) {
@@ -78,7 +78,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
     try {
       const data = await authClient.signIn.social({
         provider: "google",
-        callbackURL: env.NEXT_PUBLIC_APP_URL,
+        callbackURL: `${env.NEXT_PUBLIC_APP_URL}/?auth_google=true`,
       });
 
       if (!data) {

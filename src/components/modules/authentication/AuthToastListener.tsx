@@ -9,9 +9,16 @@ function ToastHandler() {
   const router = useRouter();
 
   useEffect(() => {
-    const success = searchParams.get("auth_success");
+    const authCredential = searchParams.get("auth_credentials");
+    const authGoogle = searchParams.get("auth_google");
 
-    if (success === "true") {
+    if (authCredential === "true") {
+      toast.success("Welcome! Successfully logged in.", {
+        description: "You now have full access to Medi Store.",
+      });
+    }
+
+    if (authGoogle === "true") {
       toast.success("Welcome! Successfully logged in with Google.", {
         description: "You now have full access to Medi Store.",
       });

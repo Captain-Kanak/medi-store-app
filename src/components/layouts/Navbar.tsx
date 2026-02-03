@@ -34,6 +34,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { User, UserRoles } from "@/types";
 import { toast } from "sonner";
+import { CartBadge } from "../modules/cart/CartBadge";
 
 interface MenuItem {
   title: string;
@@ -160,6 +161,8 @@ const Navbar = ({
           {/* --- Right: User Menu / Auth & Theme --- */}
           <div className="flex items-center gap-2 md:gap-4">
             <ModeToggle />
+
+            {user && user.role === UserRoles.CUSTOMER ? <CartBadge /> : null}
 
             {/* Desktop User Dropdown */}
             {user ? (
@@ -307,6 +310,16 @@ const Navbar = ({
                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2 mb-2">
                       Navigation
                     </p>
+
+                    <Link
+                      href="/cart"
+                      onClick={() => setIsOpen(false)}
+                      className="flex lg:hidden items-center justify-between p-3 rounded-xl font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50"
+                    >
+                      MY CART
+                      <ChevronRight className="h-4 w-4 opacity-20" />
+                    </Link>
+
                     {menu.map((item) => (
                       <Link
                         key={item.title}
