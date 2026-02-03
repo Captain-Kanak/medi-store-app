@@ -16,14 +16,23 @@ export const userService = {
       const result = await res.json();
 
       if (!result) {
-        return { data: null, error: { message: "Session not found" } };
+        return {
+          data: null,
+          error: { message: "Session not found" },
+        };
       }
 
-      return { data: result, error: null };
+      return {
+        data: result,
+        error: null,
+      };
     } catch (error) {
       console.error(error);
 
-      return { data: null, error: { message: "Failed to get session" } };
+      return {
+        data: null,
+        error: { message: "Failed to get session" },
+      };
     }
   },
 };

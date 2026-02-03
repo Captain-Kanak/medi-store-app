@@ -6,13 +6,18 @@ export interface CategoryApiResponse<T> {
   error: { message: string } | null;
 }
 
+const API_URL = env.NEXT_PUBLIC_API_URL;
+
 export const categoryService = {
   getCategories: async function (): Promise<CategoryApiResponse<Category[]>> {
     try {
-      const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/categories`);
+      const res = await fetch(`${API_URL}/categories`);
 
       if (!res.ok) {
-        return { data: null, error: { message: "Failed to fetch categories" } };
+        return {
+          data: null,
+          error: { message: "Failed to fetch categories" },
+        };
       }
 
       const result = await res.json();

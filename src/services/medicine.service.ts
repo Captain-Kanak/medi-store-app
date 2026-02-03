@@ -46,13 +46,10 @@ export const medicineService = {
       const res = await fetch(url.toString(), config);
 
       if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
         return {
           data: null,
           pagination: null,
-          error: {
-            message: errorData.message || `Server Error: ${res.status}`,
-          },
+          error: { message: "Failed to fetch medicines" },
         };
       }
 
@@ -85,13 +82,10 @@ export const medicineService = {
       const res = await fetch(`${API_URL}/medicines/${id}`);
 
       if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
         return {
           data: null,
           pagination: null,
-          error: {
-            message: errorData.message || `Server Error: ${res.status}`,
-          },
+          error: { message: "Failed to fetch medicine" },
         };
       }
 
@@ -115,7 +109,7 @@ export const medicineService = {
       return {
         data: null,
         pagination: null,
-        error: { message: "Failed to fetch medicines" },
+        error: { message: "Failed to fetch medicine" },
       };
     }
   },

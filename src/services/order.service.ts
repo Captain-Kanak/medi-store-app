@@ -10,10 +10,12 @@ interface OrderPayload {
   }[];
 }
 
+const API_URL = env.NEXT_PUBLIC_API_URL;
+
 export const orderService = {
-  createOrder: async (payload: OrderPayload) => {
+  createOrder: async function (payload: OrderPayload) {
     try {
-      const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/orders`, {
+      const res = await fetch(`${API_URL}/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,6 +31,13 @@ export const orderService = {
       }
 
       const result = await res.json();
+
+      if (!result.success) {
+        return {
+          data: null,
+          error: { message: result.message },
+        };
+      }
 
       return {
         data: result,

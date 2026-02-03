@@ -7,8 +7,10 @@ import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 import { Medicine } from "@/types";
 import { useRouter } from "next/navigation";
+import { useCartStore } from "@/store/useCartStore";
 
 export default function MedicineActions({ medicine }: { medicine: Medicine }) {
+  const addItem = useCartStore((state) => state.addItem);
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
   const { data: session } = authClient.useSession();
@@ -27,8 +29,10 @@ export default function MedicineActions({ medicine }: { medicine: Medicine }) {
     }
 
     if (actionType === "cart") {
-      // Logic for adding to cart
-      toast.success(`Added ${quantity} units to cart!`);
+      addItem(medicine, quantity);
+      toast.success(`${medicine.name} added to cart`, {
+        description: "You can view your items in the navigation bar.",
+      });
     } else {
       // Logic for direct order
       toast.info("Proceeding to checkout...");
