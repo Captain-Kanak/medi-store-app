@@ -13,13 +13,13 @@ export const userService = {
         cache: "no-store",
       });
 
-      const session = await res.json();
+      const result = await res.json();
 
-      if (!session) {
+      if (!result) {
         return { data: null, error: { message: "Session not found" } };
       }
 
-      return { data: session, error: null };
+      return { data: result, error: null };
     } catch (error) {
       console.error(error);
 

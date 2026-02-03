@@ -2,17 +2,30 @@
 
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import { categoryService } from "@/services/category.service";
+import {
+  CategoryApiResponse,
+  categoryService,
+} from "@/services/category.service";
 import { PlusCircle } from "lucide-react";
+import { Category } from "@/types";
 
 export default function CategorySection() {
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<Category[] | null>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const data = await categoryService.getCategories();
+        const { data, error } =
+          (await categoryService.getCategories()) as CategoryApiResponse<
+            Category[] | null
+          >;
+
+        if (error) {
+          console.error("Failed to load categories", error);
+          return;
+        }
+
         setCategories(data);
       } catch (err) {
         console.error("Failed to load categories", err);
@@ -20,6 +33,7 @@ export default function CategorySection() {
         setLoading(false);
       }
     };
+
     fetchCategories();
   }, []);
 
@@ -45,7 +59,7 @@ export default function CategorySection() {
                 className="h-40 rounded-2xl bg-slate-100 dark:bg-slate-800 animate-pulse"
               />
             ))
-          : categories.map((cat) => {
+          : categories?.map((cat) => {
               const Icon = PlusCircle;
 
               return (

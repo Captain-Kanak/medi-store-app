@@ -21,7 +21,6 @@ export function MedicineSort() {
 
     params.set("sortBy", sortBy);
     params.set("sortOrder", sortOrder);
-    params.set("page", "1");
 
     router.push(`/medicines?${params.toString()}`);
   };

@@ -12,6 +12,9 @@ import {
   PackageCheck,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { ApiResponse, Medicine } from "@/types";
+import Link from "next/link";
+import MedicineActions from "@/components/modules/medicines/MedicineActions";
 
 export default async function MedicineDetailsPage({
   params,
@@ -19,11 +22,19 @@ export default async function MedicineDetailsPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { data: medicine } = await medicineService.getMedicineById(slug);
+  const { data: medicine } = (await medicineService.getMedicineById(
+    slug,
+  )) as ApiResponse<Medicine>;
 
   if (!medicine) {
     return (
-      <div className="container py-20 text-center">Medicine not found.</div>
+      <div className="flex flex-col gap-4 items-center justify-center py-30">
+        <div className="container text-center">Medicine not found.</div>
+
+        <Button asChild variant="outline" className="cursor-pointer">
+          <Link href="/medicines">Browse Medicines</Link>
+        </Button>
+      </div>
     );
   }
 
@@ -98,8 +109,8 @@ export default async function MedicineDetailsPage({
               <span className="text-4xl font-bold text-blue-600">
                 ${Number(medicine.price).toFixed(2)}
               </span>
-              <span className="text-slate-400 line-through text-sm">
-                $ {(Number(medicine.price) + 5).toFixed(2)}
+              <span className="text-slate-400 line-through text-md">
+                $ {(Number(medicine.price) + 10).toFixed(2)}
               </span>
             </div>
 
@@ -115,19 +126,7 @@ export default async function MedicineDetailsPage({
             </div>
 
             <div className="pt-4 space-y-3">
-              <Button
-                size="lg"
-                className="w-full h-14 text-lg font-bold bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/20"
-              >
-                Add to Cart
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full h-14 text-lg font-bold"
-              >
-                Buy Now
-              </Button>
+              <MedicineActions medicine={medicine} />
             </div>
 
             <p className="text-center text-xs text-slate-500 pt-2">

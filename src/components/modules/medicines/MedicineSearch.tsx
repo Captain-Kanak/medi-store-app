@@ -11,7 +11,7 @@ export function MedicineSearch() {
   const searchParams = useSearchParams();
   const [value, setValue] = useState(searchParams.get("search") ?? "");
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const params = new URLSearchParams(searchParams.toString());
@@ -34,7 +34,7 @@ export function MedicineSearch() {
       </div>
 
       {/* Search Button */}
-      <Button type="submit" className="rounded-full px-5">
+      <Button type="submit" className="rounded-full px-5 cursor-pointer">
         Search
       </Button>
     </form>

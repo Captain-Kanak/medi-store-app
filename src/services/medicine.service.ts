@@ -56,17 +56,21 @@ export const medicineService = {
         };
       }
 
-      const data = await res.json();
+      const result = await res.json();
 
-      if (!data.success) {
+      if (!result.success) {
         return {
           data: null,
           pagination: null,
-          error: { message: data.message },
+          error: { message: result.message },
         };
       }
 
-      return { data: data.data, pagination: data.pagination, error: null };
+      return {
+        data: result.data,
+        pagination: result.pagination,
+        error: null,
+      };
     } catch (error) {
       console.error("Medicine Service Error:", error);
       return {
@@ -91,17 +95,21 @@ export const medicineService = {
         };
       }
 
-      const data = await res.json();
+      const result = await res.json();
 
-      if (!data.success) {
+      if (!result.success) {
         return {
           data: null,
           pagination: null,
-          error: { message: data.message },
+          error: { message: result.message },
         };
       }
 
-      return { data: data.data, pagination: null, error: null };
+      return {
+        data: result.data,
+        pagination: null,
+        error: null,
+      };
     } catch (error) {
       console.error("Medicine Service Error:", error);
       return {

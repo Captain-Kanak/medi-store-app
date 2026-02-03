@@ -1,24 +1,34 @@
 import { env } from "@/env";
+import { Category } from "@/types";
+
+export interface CategoryApiResponse<T> {
+  data: T | null;
+  error: { message: string } | null;
+}
 
 export const categoryService = {
-  getCategories: async function () {
+  getCategories: async function (): Promise<CategoryApiResponse<Category[]>> {
     try {
       const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/categories`);
 
       if (!res.ok) {
-        return [];
+        return { data: null, error: { message: "Failed to fetch categories" } };
       }
 
       const result = await res.json();
 
       if (!result.success) {
-        return [];
+        return { data: null, error: { message: result.message } };
       }
 
-      return result.data;
+      return { data: result.data, error: null };
     } catch (error) {
       console.error(error);
-      return [];
+
+      return {
+        data: null,
+        error: { message: "Failed to fetch categories" },
+      };
     }
   },
 };
