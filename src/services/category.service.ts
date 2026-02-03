@@ -23,10 +23,16 @@ export const categoryService = {
       const result = await res.json();
 
       if (!result.success) {
-        return { data: null, error: { message: result.message } };
+        return {
+          data: null,
+          error: { message: result.message },
+        };
       }
 
-      return { data: result.data, error: null };
+      return {
+        data: result.data,
+        error: null,
+      };
     } catch (error) {
       console.error(error);
 

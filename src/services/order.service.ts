@@ -40,7 +40,7 @@ export const orderService = {
       }
 
       return {
-        data: result,
+        data: result.data,
         error: null,
       };
     } catch (error) {
