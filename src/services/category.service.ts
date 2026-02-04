@@ -6,7 +6,7 @@ export interface CategoryApiResponse<T> {
   error: { message: string } | null;
 }
 
-const API_URL = env.NEXT_PUBLIC_API_URL;
+const API_URL = env.API_URL;
 
 export const categoryService = {
   getCategories: async function (): Promise<CategoryApiResponse<Category[]>> {

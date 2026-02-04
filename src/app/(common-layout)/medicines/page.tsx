@@ -4,16 +4,14 @@ import {
   medicineService,
 } from "@/services/medicine.service";
 import { Button } from "@/components/ui/button";
-import {
-  CategoryApiResponse,
-  categoryService,
-} from "@/services/category.service";
+import { CategoryApiResponse } from "@/services/category.service";
 import Link from "next/link";
 import { MedicinePagination } from "@/components/modules/medicines/MedicinePagination";
 import { ApiResponse, Category, Medicine } from "@/types";
 import { MedicineSearch } from "@/components/modules/medicines/MedicineSearch";
 import { MedicineSort } from "@/components/modules/medicines/MedicineSort";
 import MedicineSidebar from "@/components/modules/medicines/MedicineSidebar";
+import { getCategories } from "@/actions/category.action";
 
 export const dynamic = "force-dynamic";
 
@@ -29,9 +27,7 @@ export default async function MedicinesPage({
   const searchTerm = params.search || "";
 
   const { data: categories, error } =
-    (await categoryService.getCategories()) as CategoryApiResponse<
-      Category[] | null
-    >;
+    (await getCategories()) as CategoryApiResponse<Category[] | null>;
 
   if (error) {
     return <div className="text-red-500 text-center mt-4">{error.message}</div>;

@@ -10,7 +10,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { Route, UserType } from "@/types";
+import { Route, User } from "@/types";
 import Link from "next/link";
 import { AdminRoutes } from "@/routes/AdminRoutes";
 import { SellerRoutes } from "@/routes/SellerRoutes";
@@ -20,7 +20,7 @@ export function AppSidebar({
   user,
   ...props
 }: {
-  user: UserType & React.ComponentProps<typeof Sidebar>;
+  user: User & React.ComponentProps<typeof Sidebar>;
 }) {
   let routes: Route[] = [];
 

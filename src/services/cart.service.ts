@@ -1,11 +1,11 @@
 import { env } from "@/env";
 
-interface CartItem {
+export interface CartItem {
   medicineId: string;
   quantity: number;
 }
 
-const API_URL = env.NEXT_PUBLIC_API_URL;
+const API_URL = env.API_URL;
 
 export const cartService = {
   getCartItems: async function () {
@@ -80,14 +80,14 @@ export const cartService = {
       };
     }
   },
-  updateCartItem: async function (medicineId: string, quantity: number) {
+  updateCartItem: async function (payload: CartItem) {
     try {
       const res = await fetch(`${API_URL}/carts`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ medicineId, quantity }),
+        body: JSON.stringify(payload),
       });
 
       if (!res.ok) {

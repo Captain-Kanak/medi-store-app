@@ -24,7 +24,8 @@ function ToastHandler() {
       });
 
       const newParams = new URLSearchParams(searchParams.toString());
-      newParams.delete("auth_success");
+      newParams.delete("auth_credentials");
+      newParams.delete("auth_google");
       const newPath =
         window.location.pathname +
         (newParams.toString() ? `?${newParams.toString()}` : "");

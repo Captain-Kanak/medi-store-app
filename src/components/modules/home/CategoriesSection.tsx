@@ -2,12 +2,10 @@
 
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import {
-  CategoryApiResponse,
-  categoryService,
-} from "@/services/category.service";
+import { CategoryApiResponse } from "@/services/category.service";
 import { PlusCircle } from "lucide-react";
 import { Category } from "@/types";
+import { getCategories } from "@/actions/category.action";
 
 export default function CategorySection() {
   const [categories, setCategories] = useState<Category[] | null>([]);
@@ -16,10 +14,9 @@ export default function CategorySection() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data, error } =
-          (await categoryService.getCategories()) as CategoryApiResponse<
-            Category[] | null
-          >;
+        const { data, error } = (await getCategories()) as CategoryApiResponse<
+          Category[] | null
+        >;
 
         if (error) {
           console.error("Failed to load categories", error);

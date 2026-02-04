@@ -1,6 +1,11 @@
 import { create } from "zustand";
 import { Medicine } from "@/types";
-import { cartService } from "@/services/cart.service";
+import {
+  addToCart,
+  deleteCartItem,
+  getCartItems,
+  updateCartItem,
+} from "@/actions/cart.action";
 
 interface CartItem {
   medicineId: string;
@@ -15,7 +20,7 @@ interface CartState {
   items: CartItem[];
   isLoading: boolean;
   initializeCart: () => Promise<void>;
-  addItem: (product: Medicine, qty: number) => Promise<void>;
+  addItem: (medicine: Medicine, qty: number) => Promise<void>;
   updateQuantity: (medicineId: string, qty: number) => Promise<void>;
   removeItem: (medicineId: string) => Promise<void>;
   clearCart: () => void;
@@ -29,7 +34,7 @@ export const useCartStore = create<CartState>((set, get) => ({
   initializeCart: async () => {
     set({ isLoading: true });
     try {
-      const { data } = await cartService.getCartItems();
+      const { data } = await getCartItems();
       if (data?.success) {
         const formattedItems = data.data.map((item: any) => ({
           medicineId: item.medicineId,
@@ -46,14 +51,14 @@ export const useCartStore = create<CartState>((set, get) => ({
     }
   },
 
-  addItem: async (product, qty) => {
+  addItem: async (medicine, qty) => {
     const previousItems = get().items;
-    const existing = previousItems.find((i) => i.medicineId === product.id);
+    const existing = previousItems.find((i) => i.medicineId === medicine.id);
 
     if (existing) {
       set({
         items: previousItems.map((i) =>
-          i.medicineId === product.id
+          i.medicineId === medicine.id
             ? { ...i, quantity: i.quantity + qty }
             : i,
         ),
@@ -63,19 +68,19 @@ export const useCartStore = create<CartState>((set, get) => ({
         items: [
           ...previousItems,
           {
-            medicineId: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.image,
+            medicineId: medicine.id,
+            name: medicine.name,
+            price: medicine.price,
+            image: medicine.image,
             quantity: qty,
-            stock: product.stock,
+            stock: medicine.stock,
           },
         ],
       });
     }
 
-    const { data, error } = await cartService.addToCart({
-      medicineId: product.id,
+    const { data, error } = await addToCart({
+      medicineId: medicine.id,
       quantity: qty,
     });
 
@@ -95,7 +100,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       ),
     });
 
-    const { error } = await cartService.updateCartItem(medicineId, qty);
+    const { error } = await updateCartItem({ medicineId, quantity: qty });
     if (error) {
       set({ items: previousItems });
     }
@@ -105,7 +110,7 @@ export const useCartStore = create<CartState>((set, get) => ({
     const previousItems = get().items;
     set({ items: previousItems.filter((i) => i.medicineId !== medicineId) });
 
-    const { error } = await cartService.deleteCartItem(medicineId);
+    const { error } = await deleteCartItem(medicineId);
     if (error) set({ items: previousItems });
   },
 

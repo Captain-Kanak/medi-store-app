@@ -114,7 +114,6 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
   if (emailSentTo !== "") {
     return (
       <EmailVerificationCard
-        className={props.className}
         emailSentTo={emailSentTo}
         setEmailSentTo={setEmailSentTo}
       />

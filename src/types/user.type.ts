@@ -17,11 +17,6 @@ export interface User {
   updatedAt: string;
 }
 
-export interface UserType {
-  name: string;
-  role: string;
-}
-
 export enum UserRoles {
   ADMIN = "ADMIN",
   SELLER = "SELLER",

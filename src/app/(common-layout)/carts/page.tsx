@@ -43,7 +43,7 @@ export default function CartPage() {
   return (
     <div className="container mx-auto px-4 py-10">
       <div className="flex items-center gap-4 mb-8">
-        <Button variant="ghost" size="icon" asChild className="rounded-full">
+        <Button asChild variant="ghost" size="icon" className="rounded-full">
           <Link href="/medicines">
             <ChevronLeft className="h-6 w-6" />
           </Link>

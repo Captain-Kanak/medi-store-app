@@ -12,7 +12,6 @@ import { ArrowRight, Inbox } from "lucide-react";
 export default function EmailVerificationCard({
   emailSentTo,
   setEmailSentTo,
-  ...props
 }: React.ComponentProps<typeof Card> & {
   emailSentTo: string;
   setEmailSentTo: React.Dispatch<React.SetStateAction<string>>;
@@ -21,7 +20,6 @@ export default function EmailVerificationCard({
     <Card
       className={cn(
         "w-full max-w-md mx-auto overflow-hidden border-slate-200/60 dark:border-slate-800/60 shadow-2xl",
-        props.className,
       )}
     >
       <div className="h-1.5 bg-linear-to-r from-green-500 to-emerald-600" />
