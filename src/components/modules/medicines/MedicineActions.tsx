@@ -8,6 +8,7 @@ import { authClient } from "@/lib/auth-client";
 import { Medicine } from "@/types";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/useCartStore";
+import { CheckoutModal } from "../checkout/CheckoutModal";
 
 export default function MedicineActions({ medicine }: { medicine: Medicine }) {
   const addItem = useCartStore((state) => state.addItem);
@@ -63,7 +64,7 @@ export default function MedicineActions({ medicine }: { medicine: Medicine }) {
             >
               <Minus className="h-4 w-4" />
             </Button>
-            <span className="w-12 text-center font-bold text-lg">
+            <span className="w-12 text-center text-gray-200 font-bold text-lg">
               {quantity}
             </span>
             <Button
@@ -86,21 +87,21 @@ export default function MedicineActions({ medicine }: { medicine: Medicine }) {
         <Button
           onClick={() => handleAction("cart")}
           size="lg"
-          className="w-full h-14 text-lg font-bold bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/20 rounded-2xl transition-all active:scale-[0.98] cursor-pointer"
+          className="w-full h-14 text-lg text-gray-200 font-bold bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/20 rounded-2xl transition-all active:scale-[0.98] cursor-pointer"
         >
           <ShoppingCart className="mr-2 h-5 w-5" />
           Add to Cart
         </Button>
 
-        <Button
-          onClick={() => handleAction("order")}
-          variant="outline"
-          size="lg"
-          className="w-full h-14 text-lg font-bold rounded-2xl border-2 hover:bg-slate-50 dark:hover:bg-slate-900 transition-all active:scale-[0.98] cursor-pointer"
-        >
-          <Zap className="mr-2 h-5 w-5 fill-amber-500 text-amber-500" />
-          Order Now
-        </Button>
+        <CheckoutModal>
+          <Button
+            onClick={() => addItem(medicine, 1)}
+            className="w-full h-14 text-lg text-gray-200 font-bold bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/20 rounded-2xl transition-all active:scale-[0.98] cursor-pointer"
+          >
+            <Zap className="mr-2 h-5 w-5" />
+            Order Now
+          </Button>
+        </CheckoutModal>
       </div>
     </div>
   );

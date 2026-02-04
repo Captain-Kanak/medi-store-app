@@ -1,8 +1,9 @@
 import { env } from "@/env";
 import { cookies } from "next/headers";
 
-interface OrderPayload {
+export interface OrderPayload {
   shippingAddress: string;
+  phone: string;
   paymentMethod: string;
   items: {
     quantity: number;

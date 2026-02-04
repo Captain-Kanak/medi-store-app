@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ShoppingBag, ArrowRight, ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import { CheckoutModal } from "../checkout/CheckoutModal";
 
 export default function CartContent() {
   const { items, getTotalPrice, isLoading } = useCartStore();
@@ -88,15 +89,11 @@ export default function CartContent() {
               </div>
             </div>
 
-            <Button
-              asChild
-              className="w-full mt-8 h-14 text-lg font-bold bg-blue-600 hover:bg-blue-700 rounded-2xl shadow-xl shadow-blue-500/20 group"
-            >
-              <Link href="/checkout">
-                Go to Checkout
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
+            <CheckoutModal>
+              <Button className="w-full h-14 text-lg font-bold bg-blue-600 rounded-2xl">
+                Proceed to Checkout
+              </Button>
+            </CheckoutModal>
 
             <p className="text-center text-[10px] text-slate-400 mt-6 uppercase tracking-widest font-bold">
               Secure Transaction
