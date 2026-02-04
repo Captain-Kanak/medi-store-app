@@ -4,13 +4,13 @@ import { UserRoles } from "./types";
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const { data } = await userService.getSession();
+  const { data: session } = await userService.getSession();
 
-  if (!data) {
+  if (!session) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  const userRole = data.user.role;
+  const userRole = session.user.role;
 
   const roleBasedRoutes: Record<string, UserRoles[]> = {
     "/admin-dashboard": [UserRoles.ADMIN],
@@ -29,6 +29,8 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
+    "/carts",
+    "/checkout",
     "/admin-dashboard",
     "/admin-dashboard/:path*",
     "/seller-dashboard",

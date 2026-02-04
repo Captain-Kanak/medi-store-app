@@ -36,8 +36,6 @@ export const cartService = {
         };
       }
 
-      console.log(result.data);
-
       return {
         data: result.data,
         error: null,
