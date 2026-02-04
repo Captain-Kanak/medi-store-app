@@ -35,8 +35,8 @@ export const useCartStore = create<CartState>((set, get) => ({
     set({ isLoading: true });
     try {
       const { data } = await getCartItems();
-      if (data?.success) {
-        const formattedItems = data.data.map((item: any) => ({
+      if (data) {
+        const formattedItems = data.map((item: any) => ({
           medicineId: item.medicineId,
           quantity: item.quantity,
           name: item.medicine.name,

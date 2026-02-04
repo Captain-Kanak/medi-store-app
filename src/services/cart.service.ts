@@ -1,4 +1,5 @@
 import { env } from "@/env";
+import { cookies } from "next/headers";
 
 export interface CartItem {
   medicineId: string;
@@ -10,7 +11,14 @@ const API_URL = env.API_URL;
 export const cartService = {
   getCartItems: async function () {
     try {
-      const res = await fetch(`${API_URL}/carts`);
+      const cookieStore = await cookies();
+
+      const res = await fetch(`${API_URL}/carts`, {
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+        cache: "no-store",
+      });
 
       if (!res.ok) {
         return {
@@ -28,6 +36,8 @@ export const cartService = {
         };
       }
 
+      console.log(result.data);
+
       return {
         data: result.data,
         error: null,
@@ -43,10 +53,13 @@ export const cartService = {
   },
   addToCart: async function (payload: CartItem) {
     try {
+      const cookieStore = await cookies();
+
       const res = await fetch(`${API_URL}/carts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
         },
         body: JSON.stringify(payload),
       });
@@ -82,10 +95,13 @@ export const cartService = {
   },
   updateCartItem: async function (payload: CartItem) {
     try {
+      const cookieStore = await cookies();
+
       const res = await fetch(`${API_URL}/carts`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
         },
         body: JSON.stringify(payload),
       });
@@ -121,11 +137,15 @@ export const cartService = {
   },
   deleteCartItem: async function (medicineId: string) {
     try {
+      const cookieStore = await cookies();
+
       const res = await fetch(`${API_URL}/carts`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
         },
+        credentials: "include",
         body: JSON.stringify({ medicineId }),
       });
 

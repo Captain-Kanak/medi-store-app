@@ -32,7 +32,7 @@ export function CartItemRow({ item }: { item: any }) {
             <Button
               onClick={() => updateQuantity(item.medicineId, item.quantity - 1)}
               disabled={item.quantity <= 1}
-              className="p-1 hover:text-blue-600 disabled:opacity-30"
+              className="p-1 hover:text-blue-600 disabled:opacity-30 cursor-pointer"
             >
               <Minus className="h-4 w-4" />
             </Button>
@@ -41,7 +41,7 @@ export function CartItemRow({ item }: { item: any }) {
             </span>
             <Button
               onClick={() => updateQuantity(item.medicineId, item.quantity + 1)}
-              className="p-1 hover:text-blue-600"
+              className="p-1 hover:text-blue-600 cursor-pointer"
             >
               <Plus className="h-4 w-4" />
             </Button>
@@ -49,7 +49,7 @@ export function CartItemRow({ item }: { item: any }) {
 
           <Button
             onClick={() => removeItem(item.medicineId)}
-            className="text-slate-400 hover:text-red-500 transition-colors"
+            className="text-slate-400 hover:text-red-500 transition-colors cursor-pointer"
           >
             <Trash2 className="h-4 w-4" />
           </Button>
