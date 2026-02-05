@@ -2,6 +2,7 @@ import * as React from "react";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -15,6 +16,7 @@ import Link from "next/link";
 import { AdminRoutes } from "@/routes/AdminRoutes";
 import { SellerRoutes } from "@/routes/SellerRoutes";
 import { CustomerRoutes } from "@/routes/CustomerRoutes";
+import { NavUser } from "../modules/dashboard/NavUser";
 
 export function AppSidebar({
   user,
@@ -62,6 +64,10 @@ export function AppSidebar({
           </SidebarGroup>
         ))}
       </SidebarContent>
+
+      <SidebarFooter>
+        <NavUser user={user} />
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );
