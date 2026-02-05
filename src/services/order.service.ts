@@ -7,7 +7,6 @@ export interface OrderPayload {
   paymentMethod: string;
   items: {
     quantity: number;
-    price: number;
     medicineId: string;
   }[];
 }
@@ -45,7 +44,7 @@ export const orderService = {
       }
 
       return {
-        data: result.data,
+        data: result,
         error: null,
       };
     } catch (error) {

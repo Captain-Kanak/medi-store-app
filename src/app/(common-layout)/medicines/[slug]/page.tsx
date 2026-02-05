@@ -22,6 +22,7 @@ export default async function MedicineDetailsPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+
   const { data: medicine } = (await medicineService.getMedicineById(
     slug,
   )) as ApiResponse<Medicine>;

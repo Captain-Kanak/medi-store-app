@@ -5,7 +5,7 @@ import { CartItemRow } from "@/components/modules/cart/CartItemRow";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { ShoppingBag, ArrowRight, ChevronLeft } from "lucide-react";
+import { ShoppingBag, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { CheckoutModal } from "../checkout/CheckoutModal";
 
@@ -90,7 +90,7 @@ export default function CartContent() {
             </div>
 
             <CheckoutModal>
-              <Button className="w-full h-14 text-lg font-bold bg-blue-600 rounded-2xl">
+              <Button className="w-full h-14 text-lg font-bold bg-blue-600 rounded-2xl cursor-pointer text-gray-200">
                 Proceed to Checkout
               </Button>
             </CheckoutModal>

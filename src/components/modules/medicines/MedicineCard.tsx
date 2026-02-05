@@ -23,7 +23,7 @@ export function MedicineCard({ medicine }: { medicine: Medicine }) {
         </div>
 
         <div className="absolute top-3 left-3">
-          <Badge className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md text-blue-600 border-none shadow-sm">
+          <Badge className="bg-white/80 backdrop-blur-md text-blue-600 border-none shadow-sm">
             {medicine.brand}
           </Badge>
         </div>
@@ -38,10 +38,6 @@ export function MedicineCard({ medicine }: { medicine: Medicine }) {
             ${Number(medicine.price).toFixed(2)}
           </span>
         </div>
-
-        <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
-          {medicine.description}
-        </p>
 
         <div className="mt-4 grid grid-cols-2 gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
           <div className="flex flex-col border-r border-slate-200 dark:border-slate-800">

@@ -16,6 +16,7 @@ import { Separator } from "@/components/ui/separator";
 import { ShoppingBag, Truck, ShieldCheck, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { placeOrder } from "@/actions/order.action";
 
 export function CheckoutModal({ children }: { children: React.ReactNode }) {
   const { items, getTotalPrice, clearCart } = useCartStore();
@@ -25,18 +26,34 @@ export function CheckoutModal({ children }: { children: React.ReactNode }) {
 
   const total = getTotalPrice();
 
-  const handlePlaceOrder = async (e: React.FormEvent) => {
+  const handlePlaceOrder = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // API Call to Express: await orderService.create({ address, phone, items });
-      await new Promise((res) => setTimeout(res, 1500)); // Simulation
+      const formData = new FormData(e.currentTarget);
+
+      const payload = {
+        shippingAddress: formData.get("address") as string,
+        phone: formData.get("phone") as string,
+        paymentMethod: "Cash on Delivery",
+        items: items.map((item) => ({
+          quantity: item.quantity,
+          medicineId: item.medicineId,
+        })),
+      };
+
+      const { data, error } = await placeOrder(payload);
+
+      if (error) {
+        toast.error("Something went wrong");
+        return;
+      }
 
       toast.success("Order placed successfully!");
       clearCart();
       setOpen(false);
-      router.push("/orders/success");
+      router.push("/customer-dashboard/orders");
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
@@ -69,7 +86,9 @@ export function CheckoutModal({ children }: { children: React.ReactNode }) {
               <div className="space-y-2">
                 <Label htmlFor="address">Delivery Address</Label>
                 <Input
+                  type="text"
                   id="address"
+                  name="address"
                   placeholder="123 Pharma St, City"
                   required
                   className="rounded-xl border-slate-200"
@@ -78,8 +97,9 @@ export function CheckoutModal({ children }: { children: React.ReactNode }) {
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
                 <Input
-                  id="phone"
                   type="tel"
+                  id="phone"
+                  name="phone"
                   placeholder="+880..."
                   required
                   className="rounded-xl border-slate-200"

@@ -17,7 +17,7 @@ export default function MedicineActions({ medicine }: { medicine: Medicine }) {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
-  const handleAction = (actionType: "cart" | "order") => {
+  const handleAction = () => {
     if (!user) {
       toast.error("Authentication Required", {
         description: "Please log in to add items to your cart or place orders.",
@@ -29,15 +29,10 @@ export default function MedicineActions({ medicine }: { medicine: Medicine }) {
       return;
     }
 
-    if (actionType === "cart") {
-      addItem(medicine, quantity);
-      toast.success(`${medicine.name} added to cart`, {
-        description: "You can view your items in the navigation bar.",
-      });
-    } else {
-      // Logic for direct order
-      toast.info("Proceeding to checkout...");
-    }
+    addItem(medicine, quantity);
+    toast.success(`${medicine.name} added to cart`, {
+      description: "You can view your items in the navigation bar.",
+    });
   };
 
   const increment = () => {
@@ -85,7 +80,7 @@ export default function MedicineActions({ medicine }: { medicine: Medicine }) {
       {/* Buttons */}
       <div className="pt-4 space-y-3">
         <Button
-          onClick={() => handleAction("cart")}
+          onClick={() => handleAction()}
           size="lg"
           className="w-full h-14 text-lg text-gray-200 font-bold bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/20 rounded-2xl transition-all active:scale-[0.98] cursor-pointer"
         >
