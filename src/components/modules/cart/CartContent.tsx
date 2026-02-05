@@ -90,7 +90,7 @@ export default function CartContent() {
             </div>
 
             <CheckoutModal>
-              <Button className="w-full h-14 text-lg font-bold bg-blue-600 rounded-2xl cursor-pointer text-gray-200">
+              <Button className="w-full h-14 text-lg text-gray-200 font-bold bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/20 rounded-2xl transition-all active:scale-[0.98] cursor-pointer">
                 Proceed to Checkout
               </Button>
             </CheckoutModal>
