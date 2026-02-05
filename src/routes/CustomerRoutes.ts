@@ -1,20 +1,24 @@
 import { Route } from "@/types";
+import { LayoutDashboard, ShoppingCart, User } from "lucide-react";
 
 export const CustomerRoutes: Route[] = [
   {
-    title: "Dashboard",
+    title: "customer Panel",
     items: [
       {
         title: "Overview",
         url: "/customer-dashboard",
+        icon: LayoutDashboard,
       },
       {
-        title: "Admin",
-        url: "/admin-dashboard",
+        title: "Profile",
+        url: "/customer-dashboard/profile",
+        icon: User,
       },
       {
-        title: "Seller",
-        url: "/seller-dashboard",
+        title: "My Orders",
+        url: "/customer-dashboard/orders",
+        icon: ShoppingCart,
       },
     ],
   },

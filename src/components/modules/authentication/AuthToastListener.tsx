@@ -9,14 +9,7 @@ function ToastHandler() {
   const router = useRouter();
 
   useEffect(() => {
-    const authCredential = searchParams.get("auth_credentials");
     const authGoogle = searchParams.get("auth_google");
-
-    if (authCredential === "true") {
-      toast.success("Welcome! Successfully logged in.", {
-        description: "You now have full access to Medi Store.",
-      });
-    }
 
     if (authGoogle === "true") {
       toast.success("Welcome! Successfully logged in with Google.", {
@@ -24,7 +17,6 @@ function ToastHandler() {
       });
 
       const newParams = new URLSearchParams(searchParams.toString());
-      newParams.delete("auth_credentials");
       newParams.delete("auth_google");
       const newPath =
         window.location.pathname +

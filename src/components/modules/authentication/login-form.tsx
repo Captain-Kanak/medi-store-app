@@ -56,7 +56,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
           email: value.email,
           password: value.password,
           rememberMe: true,
-          callbackURL: `${env.NEXT_PUBLIC_APP_URL}/?auth_credentials=true`,
+          callbackURL: `${env.NEXT_PUBLIC_APP_URL}`,
         });
 
         if (error) {

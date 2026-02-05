@@ -9,7 +9,7 @@ export default function Home() {
       <AuthToastListener />
 
       <BannerSection />
-      <CategorySection />
+      {/* <CategorySection /> */}
       <BrandPartners />
     </div>
   );

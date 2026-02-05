@@ -64,7 +64,7 @@ export default async function DashboardLayout({
         {/* Fancy Sticky Header with Glassmorphism */}
         <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-2 border-b bg-white/80 px-6 backdrop-blur-md dark:bg-slate-900/80 transition-all">
           <div className="flex items-center gap-2">
-            <SidebarTrigger className="-ml-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" />
+            <SidebarTrigger className="-ml-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer" />
             <Separator orientation="vertical" className="mx-2 h-4" />
             <Breadcrumb>
               <BreadcrumbList>

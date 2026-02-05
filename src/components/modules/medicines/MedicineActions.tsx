@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingCart, Zap } from "lucide-react";
 import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
-import { Medicine } from "@/types";
+import { Medicine, User, UserRoles } from "@/types";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/useCartStore";
 import { CheckoutModal } from "../checkout/CheckoutModal";
@@ -15,7 +15,8 @@ export default function MedicineActions({ medicine }: { medicine: Medicine }) {
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
   const { data: session } = authClient.useSession();
-  const user = session?.user;
+  const user = session?.user as User | undefined;
+  const isCustomer = user?.role === UserRoles.CUSTOMER;
 
   const handleAction = () => {
     if (!user) {
@@ -26,6 +27,22 @@ export default function MedicineActions({ medicine }: { medicine: Medicine }) {
           onClick: () => router.push("/login"),
         },
       });
+      return;
+    }
+
+    if (medicine.stock < quantity) {
+      toast.error("Out of stock", {
+        description: "This medicine is currently out of stock.",
+      });
+
+      return;
+    }
+
+    if (!isCustomer) {
+      toast.error("Access Denied", {
+        description: "Only customers can add items to their cart.",
+      });
+
       return;
     }
 
@@ -91,12 +108,18 @@ export default function MedicineActions({ medicine }: { medicine: Medicine }) {
         <CheckoutModal>
           <Button
             onClick={() => addItem(medicine, 1)}
+            disabled={!isCustomer}
             className="w-full h-14 text-lg text-gray-200 font-bold bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/20 rounded-2xl transition-all active:scale-[0.98] cursor-pointer"
           >
             <Zap className="mr-2 h-5 w-5" />
             Order Now
           </Button>
         </CheckoutModal>
+        {!isCustomer && (
+          <p className="text-xs text-center text-slate-400">
+            Only customers can place orders.
+          </p>
+        )}
       </div>
     </div>
   );

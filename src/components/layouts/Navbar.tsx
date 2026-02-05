@@ -35,6 +35,7 @@ import { useRouter } from "next/navigation";
 import { User, UserRoles } from "@/types";
 import { toast } from "sonner";
 import { CartBadge } from "../modules/cart/CartBadge";
+import Logo from "./Logo";
 
 interface MenuItem {
   title: string;
@@ -124,21 +125,7 @@ const Navbar = ({
         <nav className="flex items-center justify-between">
           {/* --- Left: Logo & Desktop Links --- */}
           <div className="flex items-center gap-8">
-            <Link
-              href={logo.url}
-              className="flex items-center gap-2 group transition-opacity hover:opacity-90"
-            >
-              <Image
-                src={logo.src}
-                className="dark:invert w-8 h-8 md:w-10 md:h-10"
-                width={40}
-                height={40}
-                alt={logo.alt}
-              />
-              <span className="text-xl font-black tracking-tighter bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                {logo.title}
-              </span>
-            </Link>
+            <Logo />
 
             <div className="hidden lg:block">
               <NavigationMenu>
