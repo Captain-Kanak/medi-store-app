@@ -1,5 +1,6 @@
 import { env } from "@/env";
 import { ApiResponse, Medicine } from "@/types";
+import { cookies } from "next/headers";
 
 export interface GetMedicinesParams {
   search?: string;
@@ -8,6 +9,11 @@ export interface GetMedicinesParams {
   sortBy?: "price" | "name" | "createdAt" | "stock";
   sortOrder?: "asc" | "desc";
   categoryId?: string;
+}
+
+export interface GetSellerMedicinesParams {
+  page?: number;
+  limit?: number;
 }
 
 interface MedicineServiceOptions {
@@ -70,6 +76,62 @@ export const medicineService = {
       };
     } catch (error) {
       console.error("Medicine Service Error:", error);
+      return {
+        data: null,
+        pagination: null,
+        error: { message: "Failed to fetch medicines" },
+      };
+    }
+  },
+  getSellerMedicines: async function (
+    params?: GetSellerMedicinesParams,
+  ): Promise<ApiResponse<Medicine[]>> {
+    try {
+      const cookieStore = await cookies();
+      const url = new URL(`${API_URL}/medicines/seller`);
+
+      if (params) {
+        Object.entries(params).forEach(([key, value]) => {
+          if (value !== undefined && value !== null && value !== "") {
+            url.searchParams.append(key, value.toString());
+          }
+        });
+      }
+
+      const res = await fetch(url.toString(), {
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+        credentials: "include",
+        cache: "no-store",
+      });
+
+      if (!res.ok) {
+        return {
+          data: null,
+          pagination: null,
+          error: { message: "Failed to fetch medicines" },
+        };
+      }
+
+      const result = await res.json();
+
+      if (!result.success) {
+        return {
+          data: null,
+          pagination: null,
+          error: { message: result.message },
+        };
+      }
+
+      return {
+        data: result.data,
+        pagination: result.pagination,
+        error: null,
+      };
+    } catch (error) {
+      console.error("Medicine Service Error:", error);
+
       return {
         data: null,
         pagination: null,
