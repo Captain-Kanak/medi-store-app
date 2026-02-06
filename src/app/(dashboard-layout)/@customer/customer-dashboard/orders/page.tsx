@@ -41,9 +41,10 @@ export default async function CustomerOrdersPage({
 
   return (
     <div className="space-y-6">
-      <header>
-        <h1 className="text-3xl font-black tracking-tight">My Orders</h1>
+      <header className="space-y-1">
+        <h1 className="text-3xl font-black tracking-tight">Orders History</h1>
         <p className="text-slate-500">View and track your medical purchases.</p>
+        <p>Total Orders: {orders.length}</p>
       </header>
 
       <div className="grid gap-6">

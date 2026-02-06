@@ -23,7 +23,7 @@ export default async function CustomerDashboard() {
       title: "Total Orders",
       value: metrics.totalOrders,
       icon: ShoppingBag,
-      description: "Lifetime orders placed",
+      description: "Complete order history",
       color: "text-blue-600",
       bg: "bg-blue-50",
     },
@@ -31,15 +31,15 @@ export default async function CustomerDashboard() {
       title: "Total Spent",
       value: `$${metrics.totalRevenue.toFixed(2)}`,
       icon: Wallet,
-      description: "Excluding cancelled orders",
+      description: "Total successful purchases",
       color: "text-emerald-600",
       bg: "bg-emerald-50",
     },
     {
       title: "Active Orders",
-      value: metrics.pending + metrics.processing,
+      value: metrics.pending + metrics.processing + metrics.shipped,
       icon: Clock,
-      description: "Pending & Processing",
+      description: "Pending, Packing & Shipped",
       color: "text-amber-600",
       bg: "bg-amber-50",
     },
@@ -127,6 +127,14 @@ export default async function CustomerDashboard() {
               color="bg-emerald-500"
               icon={<CheckCircle2 className="h-4 w-4 text-emerald-500" />}
             />
+
+            <StatusRow
+              label="Shipped"
+              count={metrics.shipped}
+              total={metrics.totalOrders}
+              color="bg-indigo-500"
+            />
+
             <StatusRow
               label="Processing"
               count={metrics.processing}
@@ -134,6 +142,7 @@ export default async function CustomerDashboard() {
               color="bg-blue-500"
               icon={<Truck className="h-4 w-4 text-blue-500" />}
             />
+
             <StatusRow
               label="Pending"
               count={metrics.pending}
@@ -141,6 +150,7 @@ export default async function CustomerDashboard() {
               color="bg-amber-500"
               icon={<Clock className="h-4 w-4 text-amber-500" />}
             />
+
             <StatusRow
               label="Cancelled"
               count={metrics.cancelled}

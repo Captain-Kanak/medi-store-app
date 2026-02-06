@@ -97,11 +97,6 @@ export default async function DashboardLayout({
 
             <div className="h-8 w-px bg-slate-200 dark:bg-slate-800 mx-1 hidden sm:block" />
 
-            <button className="relative p-2 text-slate-500 hover:text-blue-600 transition-colors">
-              <Bell className="h-5 w-5" />
-              <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-rose-500 border-2 border-white dark:border-slate-900" />
-            </button>
-
             <ModeToggle />
           </div>
         </header>
