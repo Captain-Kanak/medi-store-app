@@ -10,11 +10,15 @@ import {
   Calendar,
   Building2,
   PackageCheck,
+  Store,
+  ChevronRight,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { ApiResponse, Medicine } from "@/types";
 import Link from "next/link";
 import MedicineActions from "@/components/modules/medicines/MedicineActions";
+import Image from "next/image";
+import MedicineReviews from "@/components/modules/medicines/MedicineReviews";
 
 export default async function MedicineDetailsPage({
   params,
@@ -90,17 +94,55 @@ export default async function MedicineDetailsPage({
               />
             </div>
           </div>
+
+          <MedicineReviews reviews={medicine.reviews} />
+
+          {/* Seller Information Card */}
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 p-6 flex items-center justify-between bg-white dark:bg-slate-900 shadow-sm">
+            <div className="flex items-center gap-4">
+              <div className="h-14 w-14 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">
+                {medicine?.seller?.image ? (
+                  <Image
+                    src={medicine.seller.image}
+                    alt={medicine.seller.name}
+                    className="rounded-2xl h-full w-full object-cover"
+                  />
+                ) : (
+                  <Store className="h-7 w-7 text-blue-600 dark:text-blue-400" />
+                )}
+              </div>
+              <div>
+                <p className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">
+                  Authorized Seller
+                </p>
+                <h4 className="text-lg font-bold text-slate-900 dark:text-white">
+                  Name: {medicine?.seller?.name}
+                </h4>
+                <p className="text-xs text-slate-500">
+                  Email: {medicine?.seller?.email}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="lg:col-span-5">
           <div className="sticky top-24 rounded-3xl border bg-white dark:bg-slate-900 p-8 shadow-xl shadow-blue-500/5 space-y-6">
             <div>
-              <Badge
-                variant="outline"
-                className="mb-2 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-900"
-              >
-                {medicine.brand}
-              </Badge>
+              <div className="flex gap-2 mb-2">
+                <Badge
+                  variant="outline"
+                  className="text-blue-400 border-blue-200"
+                >
+                  {medicine.brand}
+                </Badge>
+                <Badge
+                  variant="secondary"
+                  className="bg-slate-100 text-slate-600"
+                >
+                  {medicine?.category?.name}
+                </Badge>
+              </div>
               <h1 className="text-4xl font-black text-slate-900 dark:text-white">
                 {medicine.name}
               </h1>
@@ -111,7 +153,7 @@ export default async function MedicineDetailsPage({
                 ${Number(medicine.price).toFixed(2)}
               </span>
               <span className="text-slate-400 line-through text-md">
-                $ {(Number(medicine.price) + 10).toFixed(2)}
+                $ {(Number(medicine.price) * 1.2).toFixed(2)}
               </span>
             </div>
 
