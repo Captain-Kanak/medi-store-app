@@ -11,7 +11,9 @@ const API_URL = env.API_URL;
 export const categoryService = {
   getCategories: async function (): Promise<CategoryApiResponse<Category[]>> {
     try {
-      const res = await fetch(`${API_URL}/categories`);
+      const res = await fetch(`${API_URL}/categories`, {
+        cache: "no-store",
+      });
 
       if (!res.ok) {
         return {

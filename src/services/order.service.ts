@@ -54,6 +54,46 @@ export const orderService = {
       };
     }
   },
+  getOrderMetrics: async function () {
+    try {
+      const cookieStore = await cookies();
+
+      const res = await fetch(`${API_URL}/orders/metrics`, {
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+        cache: "no-store",
+      });
+
+      if (!res.ok) {
+        return {
+          data: null,
+          error: { message: "Failed to fetch order metrics" },
+        };
+      }
+
+      const result = await res.json();
+
+      if (!result.success) {
+        return {
+          data: null,
+          error: { message: result.message },
+        };
+      }
+
+      return {
+        data: result.data,
+        error: null,
+      };
+    } catch (error) {
+      console.error("Order Service Error:", error);
+
+      return {
+        data: null,
+        error: { message: "Failed to fetch order metrics" },
+      };
+    }
+  },
   createOrder: async function (payload: OrderPayload) {
     try {
       const cookieStore = await cookies();
