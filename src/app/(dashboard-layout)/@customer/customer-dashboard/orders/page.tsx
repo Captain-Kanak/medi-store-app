@@ -1,13 +1,23 @@
-import { orderService } from "@/services/order.service";
-import { Badge } from "@/components/ui/badge";
+import { GerOrdersParams, orderService } from "@/services/order.service";
 import { Card } from "@/components/ui/card";
 import { ShoppingBag, Package, Calendar } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { UserOrderActions } from "@/components/modules/order/UserOrderActions";
+import { OrderPagination } from "@/components/modules/order/OrderPagination";
 
-export default async function CustomerOrdersPage() {
-  const { data: orders } = await orderService.getOrders();
+export default async function CustomerOrdersPage({
+  searchParams,
+}: {
+  searchParams: Promise<GerOrdersParams>;
+}) {
+  const params = await searchParams;
+  const currentPage = params.page || 1;
+
+  const { data: orders, pagination } = await orderService.getOrders({
+    page: currentPage,
+    limit: 10,
+  });
 
   if (!orders || orders.length === 0) {
     return (
@@ -28,19 +38,6 @@ export default async function CustomerOrdersPage() {
       </div>
     );
   }
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "DELIVERED":
-        return "bg-emerald-500/10 text-emerald-600 border-emerald-200";
-      case "PROCESSING":
-        return "bg-blue-500/10 text-blue-600 border-blue-200";
-      case "CANCELLED":
-        return "bg-rose-500/10 text-rose-600 border-rose-200";
-      default:
-        return "bg-slate-500/10 text-slate-600 border-slate-200";
-    }
-  };
 
   return (
     <div className="space-y-6">
@@ -131,6 +128,11 @@ export default async function CustomerOrdersPage() {
           </Card>
         ))}
       </div>
+
+      <OrderPagination
+        totalPages={pagination?.totalPage || 0}
+        currentPage={Number(currentPage)}
+      />
     </div>
   );
 }

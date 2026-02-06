@@ -11,14 +11,28 @@ export interface OrderPayload {
   }[];
 }
 
+export interface GerOrdersParams {
+  page?: number;
+  limit?: number;
+}
+
 const API_URL = env.API_URL;
 
 export const orderService = {
-  getOrders: async function () {
+  getOrders: async function (params?: GerOrdersParams) {
     try {
       const cookieStore = await cookies();
+      const url = new URL(`${API_URL}/orders`);
 
-      const res = await fetch(`${API_URL}/orders`, {
+      if (params) {
+        Object.entries(params).forEach(([key, value]) => {
+          if (value !== undefined && value !== null && value !== "") {
+            url.searchParams.append(key, value.toString());
+          }
+        });
+      }
+
+      const res = await fetch(url.toString(), {
         headers: {
           Cookie: cookieStore.toString(),
         },
@@ -28,6 +42,7 @@ export const orderService = {
       if (!res.ok) {
         return {
           data: null,
+          pagination: null,
           error: { message: "Failed to fetch orders" },
         };
       }
@@ -37,12 +52,14 @@ export const orderService = {
       if (!result.success) {
         return {
           data: null,
+          pagination: null,
           error: { message: result.message },
         };
       }
 
       return {
         data: result.data,
+        pagination: result.pagination,
         error: null,
       };
     } catch (error) {
@@ -50,6 +67,7 @@ export const orderService = {
 
       return {
         data: null,
+        pagination: null,
         error: { message: "Failed to fetch orders" },
       };
     }
