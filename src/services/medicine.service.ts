@@ -1,6 +1,6 @@
 import { env } from "@/env";
 import { ApiResponse, Medicine } from "@/types";
-import { error } from "console";
+import { add } from "date-fns";
 import { cookies } from "next/headers";
 
 export interface GetMedicinesParams {
@@ -30,9 +30,64 @@ export interface UpdateMedicineData {
   expiryDate?: Date;
 }
 
+export interface CreateMedicineData {
+  name: string;
+  brand: string;
+  price: number;
+  stock: number;
+  description: string;
+  image: string;
+  dosage: string;
+  expiryDate: Date;
+  categoryId: string;
+}
+
 const API_URL = env.API_URL;
 
 export const medicineService = {
+  addMedicine: async (payload: CreateMedicineData) => {
+    try {
+      const cookieStore = await cookies();
+
+      const res = await fetch(`${API_URL}/medicines`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
+        credentials: "include",
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        return {
+          data: null,
+          error: { message: "Failed to add medicine" },
+        };
+      }
+
+      const result = await res.json();
+
+      if (!result.success) {
+        return {
+          data: null,
+          error: { message: result.message },
+        };
+      }
+
+      return {
+        data: result.data,
+        error: null,
+      };
+    } catch (error) {
+      console.error("Medicine Service Error:", error);
+
+      return {
+        data: null,
+        error: { message: "Failed to add medicine" },
+      };
+    }
+  },
   getMedicines: async function (
     params?: GetMedicinesParams,
     options?: MedicineServiceOptions,

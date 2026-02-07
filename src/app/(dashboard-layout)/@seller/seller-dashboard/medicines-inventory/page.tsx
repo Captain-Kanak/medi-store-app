@@ -58,6 +58,7 @@ export default async function SellerMedicinesInventory({
             <TableRow>
               <TableHead className="w-75 font-bold py-4">Medicine</TableHead>
               <TableHead className="font-bold">Category</TableHead>
+              <TableHead className="font-bold">Dosage</TableHead>
               <TableHead className="font-bold">Price</TableHead>
               <TableHead className="font-bold">Stock</TableHead>
               <TableHead className="text-right font-bold">Actions</TableHead>
@@ -87,6 +88,11 @@ export default async function SellerMedicinesInventory({
                 <TableCell>
                   <Badge variant="outline" className="rounded-lg font-medium">
                     {item?.category?.name}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <Badge variant="outline" className="rounded-lg font-medium">
+                    {item?.dosage}
                   </Badge>
                 </TableCell>
                 <TableCell className="font-bold text-slate-700 dark:text-slate-300">
