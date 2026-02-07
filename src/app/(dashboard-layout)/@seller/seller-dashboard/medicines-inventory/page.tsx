@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { MedicinePagination } from "@/components/modules/medicines/MedicinePagination";
+import { InventoryActions } from "@/components/modules/seller/InventoryActions";
 
 export default async function SellerMedicinesInventory({
   searchParams,
@@ -44,7 +45,7 @@ export default async function SellerMedicinesInventory({
           asChild
           className="bg-blue-600 hover:bg-blue-700 rounded-xl px-6 h-12 font-bold shadow-lg shadow-blue-200"
         >
-          <Link href="/seller-dashboard/medicines-inventory/add">
+          <Link href="/seller-dashboard/add-medicine">
             <Plus className="mr-2 h-5 w-5" /> Add Medicine
           </Link>
         </Button>
@@ -104,22 +105,7 @@ export default async function SellerMedicinesInventory({
                   </div>
                 </TableCell>
                 <TableCell className="text-right">
-                  <div className="flex justify-end gap-2">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-9 w-9 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-blue-50"
-                    >
-                      <Edit size={18} />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-9 w-9 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50"
-                    >
-                      <Trash2 size={18} />
-                    </Button>
-                  </div>
+                  <InventoryActions medicine={item} />
                 </TableCell>
               </TableRow>
             ))}

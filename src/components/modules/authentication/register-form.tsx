@@ -13,6 +13,7 @@ import {
   CheckCircle2,
   EyeOff,
   Eye,
+  Briefcase,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,11 +37,13 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { env } from "@/env";
 import EmailVerificationCard from "./EmailVerificationCard";
+import { UserRoles } from "@/types";
 
 const registerFormSchema = z.object({
   name: z.string().min(2, "Name is too short"),
-  email: z.string().email("Invalid email address"),
+  email: z.email("Invalid email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
+  role: z.enum([UserRoles.CUSTOMER, UserRoles.SELLER]),
   imageFile: z.custom<File | null>(
     (val) => val === null || val instanceof File,
     { message: "Invalid file type" },
@@ -58,6 +61,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
       name: "",
       email: "",
       password: "",
+      role: UserRoles.CUSTOMER as UserRoles.CUSTOMER | UserRoles.SELLER,
       imageFile: null as File | null,
     },
     validators: { onSubmit: registerFormSchema },
@@ -76,8 +80,9 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
           email: value.email,
           password: value.password,
           image: imageUrl,
+          role: value.role,
           callbackURL: env.NEXT_PUBLIC_APP_URL,
-        });
+        } as any);
 
         if (error) {
           toast.error(error.message, { id: toastId });
@@ -260,6 +265,50 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                       ) : (
                         <Eye className="h-4 w-4" />
                       )}
+                    </button>
+                  </div>
+                  <FieldError errors={field.state.meta.errors} />
+                </Field>
+              )}
+            />
+
+            {/* Role Selection Field */}
+            <form.Field
+              name="role"
+              children={(field) => (
+                <Field>
+                  <FieldLabel className="text-xs font-bold uppercase text-slate-500 tracking-tight">
+                    Join as a...
+                  </FieldLabel>
+                  <div className="grid grid-cols-2 gap-4">
+                    {/* Customer Option */}
+                    <button
+                      type="button"
+                      onClick={() => field.handleChange(UserRoles.CUSTOMER)}
+                      className={cn(
+                        "flex items-center justify-center gap-2 h-11 rounded-xl border-2 transition-all cursor-pointer",
+                        field.state.value === UserRoles.CUSTOMER
+                          ? "border-blue-500 bg-blue-50/50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
+                          : "border-slate-100 dark:border-slate-800 text-slate-500",
+                      )}
+                    >
+                      <User className="h-4 w-4" />
+                      <span className="text-sm font-bold">Customer</span>
+                    </button>
+
+                    {/* Seller Option */}
+                    <button
+                      type="button"
+                      onClick={() => field.handleChange(UserRoles.SELLER)}
+                      className={cn(
+                        "flex items-center justify-center gap-2 h-11 rounded-xl border-2 transition-all cursor-pointer",
+                        field.state.value === UserRoles.SELLER
+                          ? "border-blue-500 bg-blue-50/50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
+                          : "border-slate-100 dark:border-slate-800 text-slate-500",
+                      )}
+                    >
+                      <Briefcase className="h-4 w-4" />
+                      <span className="text-sm font-bold">Seller</span>
                     </button>
                   </div>
                   <FieldError errors={field.state.meta.errors} />

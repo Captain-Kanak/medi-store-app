@@ -1,5 +1,6 @@
 import { env } from "@/env";
 import { ApiResponse, Medicine } from "@/types";
+import { error } from "console";
 import { cookies } from "next/headers";
 
 export interface GetMedicinesParams {
@@ -19,6 +20,14 @@ export interface GetSellerMedicinesParams {
 interface MedicineServiceOptions {
   cache?: RequestCache;
   revalidate?: number;
+}
+
+export interface UpdateMedicineData {
+  name?: string;
+  description?: string;
+  price?: number;
+  stock?: number;
+  categoryId?: string;
 }
 
 const API_URL = env.API_URL;
@@ -172,6 +181,93 @@ export const medicineService = {
         data: null,
         pagination: null,
         error: { message: "Failed to fetch medicine" },
+      };
+    }
+  },
+  updateMedicineById: async function (id: string, data: UpdateMedicineData) {
+    try {
+      const cookieStore = await cookies();
+
+      const res = await fetch(`${API_URL}/medicines/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
+        credentials: "include",
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        return {
+          data: null,
+          error: { message: "Failed to update medicine" },
+        };
+      }
+
+      const result = await res.json();
+
+      if (!result.success) {
+        return {
+          data: null,
+          error: { message: result.message },
+        };
+      }
+
+      return {
+        data: result.data,
+        error: null,
+      };
+    } catch (error) {
+      console.error("Medicine Service Error:", error);
+
+      return {
+        data: null,
+        error: { message: "Failed to update medicine" },
+      };
+    }
+  },
+  deleteMedicineById: async function (id: string) {
+    try {
+      const cookieStore = await cookies();
+
+      const res = await fetch(`${API_URL}/medicines/${id}`, {
+        method: "DELETE",
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+        credentials: "include",
+      });
+
+      if (!res.ok) {
+        return {
+          data: null,
+          success: false,
+          error: { message: "Failed to delete medicine" },
+        };
+      }
+
+      const result = await res.json();
+
+      if (!result.success) {
+        return {
+          data: null,
+          success: false,
+          error: { message: result.message },
+        };
+      }
+
+      return {
+        data: null,
+        success: true,
+        error: null,
+      };
+    } catch (error) {
+      console.error("Medicine Service Error:", error);
+
+      return {
+        success: false,
+        error: { message: "Failed to delete medicine" },
       };
     }
   },
