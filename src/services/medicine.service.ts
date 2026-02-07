@@ -23,11 +23,11 @@ interface MedicineServiceOptions {
 }
 
 export interface UpdateMedicineData {
-  name?: string;
-  description?: string;
   price?: number;
   stock?: number;
-  categoryId?: string;
+  description?: string;
+  image?: string;
+  expiryDate?: Date;
 }
 
 const API_URL = env.API_URL;
@@ -215,7 +215,7 @@ export const medicineService = {
       }
 
       return {
-        data: result.data,
+        data: result,
         error: null,
       };
     } catch (error) {
