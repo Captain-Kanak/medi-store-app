@@ -5,6 +5,7 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { UserOrderActions } from "@/components/modules/order/UserOrderActions";
 import { OrderPagination } from "@/components/modules/order/OrderPagination";
+import { MedicineReviewModal } from "@/components/modules/medicines/MedicineReviewModal";
 
 export default async function CustomerOrdersPage({
   searchParams,
@@ -100,12 +101,12 @@ export default async function CustomerOrdersPage({
                   {order.items.map((item: any) => (
                     <div
                       key={item.id}
-                      className="flex items-center gap-3 bg-slate-50 dark:bg-slate-900/50 p-3 rounded-2xl border border-slate-100 dark:border-slate-800"
+                      className="group relative flex items-center gap-3 bg-slate-50 dark:bg-slate-900/50 p-3 rounded-2xl border border-slate-100 dark:border-slate-800"
                     >
                       <div className="h-10 w-10 rounded-lg bg-white dark:bg-slate-800 flex items-center justify-center shadow-sm">
                         <ShoppingBag className="h-5 w-5 text-blue-500" />
                       </div>
-                      <div className="min-w-0">
+                      <div className="min-w-0 flex-1">
                         <p className="font-bold text-sm truncate">
                           {item.medicine.name}
                         </p>
@@ -113,6 +114,15 @@ export default async function CustomerOrdersPage({
                           Qty: {item.quantity} • ${item.price}
                         </p>
                       </div>
+
+                      {order.status === "DELIVERED" && (
+                        <div className="ml-auto">
+                          <MedicineReviewModal
+                            medicineId={item.medicineId}
+                            medicineName={item.medicine.name}
+                          />
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

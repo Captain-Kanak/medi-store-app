@@ -11,7 +11,6 @@ import {
   Building2,
   PackageCheck,
   Store,
-  ChevronRight,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { ApiResponse, Medicine } from "@/types";
