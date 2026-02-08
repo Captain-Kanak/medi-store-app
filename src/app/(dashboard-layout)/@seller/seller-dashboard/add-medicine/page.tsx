@@ -1,6 +1,8 @@
 import { getCategories } from "@/actions/category.action";
 import AddMedicineForm from "@/components/modules/seller/AddMedicineForm";
 
+export const dynamic = "force-dynamic";
+
 export default async function SellerAddMedicinePage() {
   const { data: categories } = await getCategories();
 

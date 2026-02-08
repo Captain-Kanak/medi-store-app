@@ -1,20 +1,34 @@
 import { Route } from "@/types";
+import { LayoutDashboard, User } from "lucide-react";
 
 export const AdminRoutes: Route[] = [
+  {
+    title: "Account",
+    items: [
+      {
+        title: "Profile",
+        url: "/admin-dashboard/profile",
+        icon: User,
+      },
+    ],
+  },
   {
     title: "Administration",
     items: [
       {
         title: "Overview",
         url: "/admin-dashboard",
+        icon: LayoutDashboard,
       },
       {
-        title: "Seller",
-        url: "/seller-dashboard",
+        title: "Manage Medicines",
+        url: "/admin-dashboard/medicines-list",
+        icon: LayoutDashboard,
       },
       {
-        title: "Customer",
-        url: "/customer-dashboard",
+        title: "Orders History",
+        url: "/admin-dashboard/orders-history",
+        icon: LayoutDashboard,
       },
     ],
   },

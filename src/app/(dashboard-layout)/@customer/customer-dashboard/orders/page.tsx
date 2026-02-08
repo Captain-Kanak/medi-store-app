@@ -7,6 +7,8 @@ import { UserOrderActions } from "@/components/modules/order/UserOrderActions";
 import { OrderPagination } from "@/components/modules/order/OrderPagination";
 import { MedicineReviewModal } from "@/components/modules/medicines/MedicineReviewModal";
 
+export const dynamic = "force-dynamic";
+
 export default async function CustomerOrdersPage({
   searchParams,
 }: {

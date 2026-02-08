@@ -14,6 +14,8 @@ import {
 import { MedicinePagination } from "@/components/modules/medicines/MedicinePagination";
 import { InventoryActions } from "@/components/modules/seller/InventoryActions";
 
+export const dynamic = "force-dynamic";
+
 export default async function SellerMedicinesInventory({
   searchParams,
 }: {
