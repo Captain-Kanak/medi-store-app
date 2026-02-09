@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Trash2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { deleteMedicine } from "@/actions/medicine.action";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,8 +16,9 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useRouter } from "next/navigation";
+import { deleteCategory } from "@/actions/category.action";
 
-export function DeleteMedicineButton({
+export function DeleteCategoryButton({
   id,
   name,
 }: {
@@ -30,11 +30,11 @@ export function DeleteMedicineButton({
 
   const handleDelete = async () => {
     setIsDeleting(true);
-    const result = await deleteMedicine(id);
+    const result = await deleteCategory(id);
     if (result.success) {
       toast.success(`${name} has been removed.`);
     } else {
-      toast.error("Failed to delete medicine. Please try again.");
+      toast.error("Failed to delete category. Please try again.");
     }
 
     router.refresh();
@@ -55,14 +55,14 @@ export function DeleteMedicineButton({
       <AlertDialogContent className="rounded-3xl border-none shadow-2xl">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-xl font-bold">
-            Delete Medicine?
+            Delete Category?
           </AlertDialogTitle>
           <AlertDialogDescription>
             Are you sure you want to delete{" "}
             <span className="font-bold text-slate-900 dark:text-white">
               "{name}"
             </span>
-            ? This action cannot be undone and the product will be removed from
+            ? This action cannot be undone and the category will be removed from
             the marketplace.
           </AlertDialogDescription>
         </AlertDialogHeader>
@@ -78,7 +78,7 @@ export function DeleteMedicineButton({
             {isDeleting ? (
               <Loader2 className="animate-spin" size={16} />
             ) : (
-              "Delete Medicine"
+              "Delete Category"
             )}
           </AlertDialogAction>
         </AlertDialogFooter>
