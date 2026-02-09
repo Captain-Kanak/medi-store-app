@@ -87,7 +87,7 @@ export default async function SellerManageOrdersPage({
                         #{order.id.slice(-6).toUpperCase()}
                       </p>
                       <p className="text-xs text-slate-500 dark:text-slate-400">
-                        {order.items.length} items
+                        {order.items?.length || 0} items
                       </p>
                     </div>
                   </div>
@@ -96,7 +96,7 @@ export default async function SellerManageOrdersPage({
                   <div className="flex items-center gap-2">
                     <User size={14} className="text-slate-400" />
                     <span className="font-medium text-slate-700 dark:text-slate-300">
-                      {order.customer.name}
+                      {order.customer?.name}
                     </span>
                   </div>
                 </TableCell>

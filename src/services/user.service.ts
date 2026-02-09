@@ -37,4 +37,45 @@ export const userService = {
       };
     }
   },
+  getUsersMetrics: async function () {
+    try {
+      const cookieStore = await cookies();
+
+      const res = await fetch(`${AUTH_URL}/api/users/metrics`, {
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+        credentials: "include",
+        cache: "no-store",
+      });
+
+      if (!res.ok) {
+        return {
+          data: null,
+          error: { message: "Failed to get user metrics" },
+        };
+      }
+
+      const result = await res.json();
+
+      if (!result) {
+        return {
+          data: null,
+          error: { message: "Session not found" },
+        };
+      }
+
+      return {
+        data: result.data,
+        error: null,
+      };
+    } catch (error) {
+      console.error(error);
+
+      return {
+        data: null,
+        error: { message: "Failed to get user metrics" },
+      };
+    }
+  },
 };
