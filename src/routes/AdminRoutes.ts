@@ -1,5 +1,5 @@
 import { Route } from "@/types";
-import { LayoutDashboard, User } from "lucide-react";
+import { LayoutDashboard, User, Pill, ClipboardList, Tags } from "lucide-react";
 
 export const AdminRoutes: Route[] = [
   {
@@ -20,15 +20,25 @@ export const AdminRoutes: Route[] = [
         url: "/admin-dashboard",
         icon: LayoutDashboard,
       },
+    ],
+  },
+  {
+    title: "Marketplace Control",
+    items: [
       {
         title: "Manage Medicines",
         url: "/admin-dashboard/medicines-list",
-        icon: LayoutDashboard,
+        icon: Pill,
+      },
+      {
+        title: "Manage Categories",
+        url: "/admin-dashboard/categories",
+        icon: Tags,
       },
       {
         title: "Orders History",
         url: "/admin-dashboard/orders-history",
-        icon: LayoutDashboard,
+        icon: ClipboardList,
       },
     ],
   },

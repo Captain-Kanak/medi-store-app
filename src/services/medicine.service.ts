@@ -313,8 +313,8 @@ export const medicineService = {
       }
 
       return {
-        data: null,
         success: true,
+        data: result.data,
         error: null,
       };
     } catch (error) {
