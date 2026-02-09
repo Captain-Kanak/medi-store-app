@@ -5,12 +5,15 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-interface PaginationProps {
+interface OrderPaginationProps {
   totalPages: number;
   currentPage: number;
 }
 
-export function OrderPagination({ totalPages, currentPage }: PaginationProps) {
+export function OrderPagination({
+  totalPages,
+  currentPage,
+}: OrderPaginationProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 

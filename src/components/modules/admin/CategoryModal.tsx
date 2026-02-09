@@ -80,7 +80,7 @@ export function CategoryModal({ category }: { category?: any }) {
             <Pencil size={16} />
           </Button>
         ) : (
-          <Button className="rounded-xl bg-blue-600 hover:bg-blue-700 font-bold gap-2">
+          <Button className="rounded-xl bg-blue-600 hover:bg-blue-700 font-bold gap-2 cursor-pointer text-white shadow-lg shadow-blue-500/20 transition-all">
             <Plus size={18} /> New Category
           </Button>
         )}

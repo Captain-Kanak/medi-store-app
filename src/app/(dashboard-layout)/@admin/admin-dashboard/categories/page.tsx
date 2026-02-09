@@ -39,7 +39,7 @@ export default async function AdminCategoriesPage() {
             <h3 className="text-xl font-black text-slate-900 dark:text-white mb-1">
               {category.name}
             </h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 min-h-[40px]">
+            <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 min-h-10">
               {category.description || "No description provided."}
             </p>
 
