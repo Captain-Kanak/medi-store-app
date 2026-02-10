@@ -1,9 +1,7 @@
+import UserProfile from "@/components/layouts/UserProfile";
+
 export const dynamic = "force-dynamic";
 
 export default function CustomerProfilePage() {
-  return (
-    <>
-      <h1>Profile</h1>
-    </>
-  );
+  return <UserProfile />;
 }
