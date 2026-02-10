@@ -13,6 +13,8 @@ import { OrderStatusUpdater } from "@/components/modules/seller/OrderStatusUpdat
 import { OrderStatus } from "@/types";
 import { OrderPagination } from "@/components/modules/order/OrderPagination";
 
+export const dynamic = "force-dynamic";
+
 export default async function SellerManageOrdersPage({
   searchParams,
 }: {

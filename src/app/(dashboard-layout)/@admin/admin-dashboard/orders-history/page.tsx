@@ -12,6 +12,8 @@ import { Badge } from "@/components/ui/badge";
 import { Package, User, Store, Calendar, CreditCard } from "lucide-react";
 import { OrderStatus } from "@/types/order.type";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminOrdersHistoryPage({
   searchParams,
 }: {

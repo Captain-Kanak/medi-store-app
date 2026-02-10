@@ -1,9 +1,11 @@
-import { categoryService } from "@/services/category.service";
-import { ChevronRight, ArrowRight } from "lucide-react";
+import { getCategories } from "@/actions/category.action";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export async function FeaturedCategories() {
-  const { data: categories } = await categoryService.getCategories();
+  const { data: categories } = await getCategories();
 
   return (
     <section className="py-16 bg-white dark:bg-slate-950">

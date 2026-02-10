@@ -1,10 +1,12 @@
-import { categoryService } from "@/services/category.service";
 import { LayoutGrid, Tags, Info } from "lucide-react";
 import { CategoryModal } from "@/components/modules/admin/CategoryModal";
 import { DeleteCategoryButton } from "@/components/modules/admin/DeleteCategoryButton";
+import { getCategories } from "@/actions/category.action";
+
+export const dynamic = "force-dynamic";
 
 export default async function AdminCategoriesPage() {
-  const { data: categories } = await categoryService.getCategories();
+  const { data: categories } = await getCategories();
 
   return (
     <div className="space-y-8 p-6">
