@@ -44,12 +44,6 @@ export default function Footer() {
               <li>
                 <FooterLink href="/medicines">Categories</FooterLink>
               </li>
-              <li>
-                <FooterLink href="#">Top Pharmacies</FooterLink>
-              </li>
-              <li>
-                <FooterLink href="#">Flash Sales</FooterLink>
-              </li>
             </ul>
           </div>
 
@@ -60,16 +54,16 @@ export default function Footer() {
             </h4>
             <ul className="space-y-4 text-sm font-medium">
               <li>
-                <FooterLink href="#">About Us</FooterLink>
+                <FooterLink href="/about">About Us</FooterLink>
               </li>
               <li>
-                <FooterLink href="#">Terms of Service</FooterLink>
+                <FooterLink href="/terms">Terms of Service</FooterLink>
               </li>
               <li>
-                <FooterLink href="#">Privacy Policy</FooterLink>
+                <FooterLink href="/privacy">Privacy Policy</FooterLink>
               </li>
               <li>
-                <FooterLink href="#">Contact Support</FooterLink>
+                <FooterLink href="/contact">Contact Support</FooterLink>
               </li>
             </ul>
           </div>
@@ -96,16 +90,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold text-slate-400 uppercase tracking-widest">
+        <div className="mt-12 pt-8 border-t dark:border-slate-800 flex flex-col md:flex-row justify-center items-center gap-4 text-xs font-bold text-slate-400 uppercase tracking-widest">
           <p>© {currentYear} Medistore. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link href="#" className="hover:text-blue-600 transition-colors">
-              Sitemap
-            </Link>
-            <Link href="#" className="hover:text-blue-600 transition-colors">
-              Cookie Policy
-            </Link>
-          </div>
         </div>
       </div>
     </footer>
