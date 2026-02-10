@@ -1,3 +1,4 @@
+import Footer from "@/components/layouts/Footer";
 import { Navbar } from "@/components/layouts/Navbar";
 
 export default function CommonLayout({
@@ -8,7 +9,10 @@ export default function CommonLayout({
   return (
     <>
       <Navbar />
+
       <div className="container mx-auto">{children}</div>
+
+      <Footer />
     </>
   );
 }

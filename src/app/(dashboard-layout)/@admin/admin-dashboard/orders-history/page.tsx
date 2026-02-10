@@ -79,7 +79,7 @@ export default async function AdminOrdersHistoryPage({
                   ? sellers.length > 1
                     ? `${sellers[0]} +${sellers.length - 1}`
                     : sellers[0]
-                  : "Multiple Sellers";
+                  : "Unknown Seller";
 
               return (
                 <TableRow
