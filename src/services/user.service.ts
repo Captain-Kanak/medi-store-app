@@ -8,7 +8,6 @@ export interface ProfileUpdatePayload {
   address?: string;
 }
 
-const AUTH_URL = env.AUTH_URL;
 const API_URL = env.API_URL;
 
 export const userService = {
@@ -16,7 +15,7 @@ export const userService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${AUTH_URL}/api/auth/get-session`, {
+      const res = await fetch(`${API_URL}/api/auth/get-session`, {
         headers: {
           Cookie: cookieStore.toString(),
         },
@@ -49,7 +48,7 @@ export const userService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/users/metrics`, {
+      const res = await fetch(`${API_URL}/api/users/metrics`, {
         headers: {
           Cookie: cookieStore.toString(),
         },
@@ -90,7 +89,7 @@ export const userService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/users`, {
+      const res = await fetch(`${API_URL}/api/users`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

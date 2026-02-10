@@ -3,26 +3,20 @@ import * as z from "zod";
 
 export const env = createEnv({
   server: {
-    SERVER_URL: z.url(),
-    CLIENT_URL: z.url(),
     AUTH_URL: z.string(),
     API_URL: z.string(),
   },
 
   client: {
     NEXT_PUBLIC_AUTH_URL: z.string(),
-    NEXT_PUBLIC_API_URL: z.string(),
     NEXT_PUBLIC_APP_URL: z.string(),
     NEXT_PUBLIC_IMGBB_API_KEY: z.string(),
   },
 
   runtimeEnv: {
-    SERVER_URL: process.env.SERVER_URL,
-    CLIENT_URL: process.env.CLIENT_URL,
     AUTH_URL: process.env.AUTH_URL,
     API_URL: process.env.API_URL,
     NEXT_PUBLIC_AUTH_URL: process.env.NEXT_PUBLIC_AUTH_URL,
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_IMGBB_API_KEY: process.env.NEXT_PUBLIC_IMGBB_API_KEY,
   },

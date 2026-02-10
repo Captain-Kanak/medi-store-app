@@ -22,7 +22,7 @@ export const orderService = {
   getOrders: async function (params?: GerOrdersParams) {
     try {
       const cookieStore = await cookies();
-      const url = new URL(`${API_URL}/orders`);
+      const url = new URL(`${API_URL}/api/orders`);
 
       if (params) {
         Object.entries(params).forEach(([key, value]) => {
@@ -76,7 +76,7 @@ export const orderService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/orders/metrics`, {
+      const res = await fetch(`${API_URL}/api/orders/metrics`, {
         headers: {
           Cookie: cookieStore.toString(),
         },
@@ -116,7 +116,7 @@ export const orderService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/orders`, {
+      const res = await fetch(`${API_URL}/api/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -158,7 +158,7 @@ export const orderService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/orders/${orderId}`, {
+      const res = await fetch(`${API_URL}/api/orders/${orderId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

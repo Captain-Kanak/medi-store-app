@@ -13,7 +13,7 @@ const API_URL = env.API_URL;
 export const categoryService = {
   getCategories: async function (): Promise<CategoryApiResponse<Category[]>> {
     try {
-      const res = await fetch(`${API_URL}/categories`, {
+      const res = await fetch(`${API_URL}/api/categories`, {
         cache: "no-store",
       });
 
@@ -53,7 +53,7 @@ export const categoryService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/categories`, {
+      const res = await fetch(`${API_URL}/api/categories`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,7 +99,7 @@ export const categoryService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/categories/${id}`, {
+      const res = await fetch(`${API_URL}/api/categories/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -142,7 +142,7 @@ export const categoryService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/categories/${id}`, {
+      const res = await fetch(`${API_URL}/api/categories/${id}`, {
         method: "DELETE",
         headers: {
           Cookie: cookieStore.toString(),

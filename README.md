@@ -69,7 +69,6 @@ MediMart is a high-performance, full-stack healthcare marketplace designed to co
    AUTH_URL="http://localhost:5000"
    API_URL="http://localhost:5000/api"
    NEXT_PUBLIC_AUTH_URL="http://localhost:5000"
-   NEXT_PUBLIC_API_URL="http://localhost:5000/api"
    NEXT_PUBLIC_APP_URL="http://localhost:3000"
    NEXT_PUBLIC_IMGBB_API_KEY="imgbb_api_key"
    ```

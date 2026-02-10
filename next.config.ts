@@ -7,11 +7,20 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "images.example.com",
-        port: "",
-        // pathname: "/my-bucket/**",
-        search: "",
       },
     ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: `${process.env.API_URL}/api/:path*`,
+      },
+      {
+        source: "/:path*",
+        destination: `${process.env.AUTH_URL}/:path*`,
+      },
+    ];
   },
 };
 

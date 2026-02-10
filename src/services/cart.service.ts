@@ -13,7 +13,7 @@ export const cartService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/carts`, {
+      const res = await fetch(`${API_URL}/api/carts`, {
         headers: {
           Cookie: cookieStore.toString(),
         },
@@ -23,7 +23,7 @@ export const cartService = {
       if (!res.ok) {
         return {
           data: null,
-          error: { message: "Failed to create order" },
+          error: { message: "Failed to get cart items" },
         };
       }
 
@@ -53,7 +53,7 @@ export const cartService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/carts`, {
+      const res = await fetch(`${API_URL}/api/carts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +95,7 @@ export const cartService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/carts`, {
+      const res = await fetch(`${API_URL}/api/carts`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -137,7 +137,7 @@ export const cartService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/carts`, {
+      const res = await fetch(`${API_URL}/api/carts`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

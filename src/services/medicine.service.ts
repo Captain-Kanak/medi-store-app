@@ -49,7 +49,7 @@ export const medicineService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/medicines`, {
+      const res = await fetch(`${API_URL}/api/medicines`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +93,7 @@ export const medicineService = {
     options?: MedicineServiceOptions,
   ): Promise<ApiResponse<Medicine[]>> {
     try {
-      const url = new URL(`${API_URL}/medicines`);
+      const url = new URL(`${API_URL}/api/medicines`);
 
       if (params) {
         Object.entries(params).forEach(([key, value]) => {
@@ -152,7 +152,7 @@ export const medicineService = {
   ): Promise<ApiResponse<Medicine[]>> {
     try {
       const cookieStore = await cookies();
-      const url = new URL(`${API_URL}/medicines/seller`);
+      const url = new URL(`${API_URL}/api/medicines/seller`);
 
       if (params) {
         Object.entries(params).forEach(([key, value]) => {
@@ -205,7 +205,7 @@ export const medicineService = {
   },
   getMedicineById: async function (id: string): Promise<ApiResponse<Medicine>> {
     try {
-      const res = await fetch(`${API_URL}/medicines/${id}`);
+      const res = await fetch(`${API_URL}/api/medicines/${id}`);
 
       if (!res.ok) {
         return {
@@ -243,7 +243,7 @@ export const medicineService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/medicines/${id}`, {
+      const res = await fetch(`${API_URL}/api/medicines/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -286,7 +286,7 @@ export const medicineService = {
     try {
       const cookieStore = await cookies();
 
-      const res = await fetch(`${API_URL}/medicines/${id}`, {
+      const res = await fetch(`${API_URL}/api/medicines/${id}`, {
         method: "DELETE",
         headers: {
           Cookie: cookieStore.toString(),

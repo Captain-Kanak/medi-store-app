@@ -7,13 +7,14 @@ export interface Review {
   medicineId: string;
 }
 
+const API_URL = env.API_URL;
+
 export const reviewService = {
   createReview: async (payload: Review) => {
     try {
       const cookieStore = await cookies();
-      const url = env.API_URL;
 
-      const res = await fetch(`${url}/reviews`, {
+      const res = await fetch(`${API_URL}/api/reviews`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
