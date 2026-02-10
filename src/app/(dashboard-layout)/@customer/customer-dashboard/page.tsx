@@ -122,39 +122,39 @@ export default async function CustomerDashboard() {
           <CardContent className="space-y-6">
             <StatusRow
               label="Delivered"
-              count={metrics.delivered}
-              total={metrics.totalOrders}
+              count={metrics?.delivered}
+              total={metrics?.totalOrders}
               color="bg-emerald-500"
               icon={<CheckCircle2 className="h-4 w-4 text-emerald-500" />}
             />
 
             <StatusRow
               label="Shipped"
-              count={metrics.shipped}
-              total={metrics.totalOrders}
+              count={metrics?.shipped}
+              total={metrics?.totalOrders}
               color="bg-indigo-500"
             />
 
             <StatusRow
               label="Processing"
-              count={metrics.processing}
-              total={metrics.totalOrders}
+              count={metrics?.processing}
+              total={metrics?.totalOrders}
               color="bg-blue-500"
               icon={<Truck className="h-4 w-4 text-blue-500" />}
             />
 
             <StatusRow
               label="Pending"
-              count={metrics.pending}
-              total={metrics.totalOrders}
+              count={metrics?.pending}
+              total={metrics?.totalOrders}
               color="bg-amber-500"
               icon={<Clock className="h-4 w-4 text-amber-500" />}
             />
 
             <StatusRow
               label="Cancelled"
-              count={metrics.cancelled}
-              total={metrics.totalOrders}
+              count={metrics?.cancelled}
+              total={metrics?.totalOrders}
               color="bg-rose-500"
               icon={<XCircle className="h-4 w-4 text-rose-500" />}
             />
