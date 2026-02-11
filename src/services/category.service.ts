@@ -59,6 +59,7 @@ export const categoryService = {
           "Content-Type": "application/json",
           Cookie: cookieStore.toString(),
         },
+        credentials: "include",
         body: JSON.stringify({ name, description }),
       });
 
@@ -105,6 +106,7 @@ export const categoryService = {
           "Content-Type": "application/json",
           Cookie: cookieStore.toString(),
         },
+        credentials: "include",
         body: JSON.stringify({ name, description }),
       });
 
@@ -147,6 +149,7 @@ export const categoryService = {
         headers: {
           Cookie: cookieStore.toString(),
         },
+        credentials: "include",
       });
 
       if (!res.ok) {

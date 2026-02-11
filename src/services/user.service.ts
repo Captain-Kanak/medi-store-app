@@ -19,6 +19,7 @@ export const userService = {
         headers: {
           Cookie: cookieStore.toString(),
         },
+        credentials: "include",
         cache: "no-store",
       });
 
@@ -95,8 +96,8 @@ export const userService = {
           "Content-Type": "application/json",
           Cookie: cookieStore.toString(),
         },
-        body: JSON.stringify(profileData),
         credentials: "include",
+        body: JSON.stringify(profileData),
       });
 
       if (!res.ok) {

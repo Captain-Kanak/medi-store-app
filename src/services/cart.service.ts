@@ -17,6 +17,7 @@ export const cartService = {
         headers: {
           Cookie: cookieStore.toString(),
         },
+        credentials: "include",
         cache: "no-store",
       });
 
@@ -59,6 +60,7 @@ export const cartService = {
           "Content-Type": "application/json",
           Cookie: cookieStore.toString(),
         },
+        credentials: "include",
         body: JSON.stringify(payload),
       });
 
@@ -101,6 +103,7 @@ export const cartService = {
           "Content-Type": "application/json",
           Cookie: cookieStore.toString(),
         },
+        credentials: "include",
         body: JSON.stringify(payload),
       });
 
