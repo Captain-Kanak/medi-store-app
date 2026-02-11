@@ -64,10 +64,7 @@ MediMart is a high-performance, full-stack healthcare marketplace designed to co
    ```
 3. Environment Variables: Create a .env file and add your credentials:
    ```bash
-   SERVER_URL="http://localhost:5000"
-   CLIENT_URL="http://localhost:3000"
-   AUTH_URL="http://localhost:5000"
-   API_URL="http://localhost:5000/api"
+   API_URL="http://localhost:5000"
    NEXT_PUBLIC_AUTH_URL="http://localhost:5000"
    NEXT_PUBLIC_APP_URL="http://localhost:3000"
    NEXT_PUBLIC_IMGBB_API_KEY="imgbb_api_key"
