@@ -17,10 +17,22 @@ export default async function CustomerOrdersPage({
   const params = await searchParams;
   const currentPage = params.page || 1;
 
-  const { data: orders, pagination } = await orderService.getOrders({
+  const {
+    data: orders,
+    pagination,
+    error,
+  } = await orderService.getOrders({
     page: currentPage,
     limit: 10,
   });
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-red-500">{error.message}</p>
+      </div>
+    );
+  }
 
   if (!orders || orders.length === 0) {
     return (
@@ -47,11 +59,11 @@ export default async function CustomerOrdersPage({
       <header className="space-y-1">
         <h1 className="text-3xl font-black tracking-tight">Orders History</h1>
         <p className="text-slate-500">View and track your medical purchases.</p>
-        <p>Total Orders: {orders.length}</p>
+        <p>Total Orders: {orders?.length ?? 0}</p>
       </header>
 
       <div className="grid gap-6">
-        {orders.map((order: any) => (
+        {orders?.map((order: any) => (
           <Card
             key={order.id}
             className="overflow-hidden border-slate-200 dark:border-slate-800 shadow-sm"
@@ -100,7 +112,7 @@ export default async function CustomerOrdersPage({
                   Ordered Items ({order.items.length})
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {order.items.map((item: any) => (
+                  {order?.items?.map((item: any) => (
                     <div
                       key={item.id}
                       className="group relative flex items-center gap-3 bg-slate-50 dark:bg-slate-900/50 p-3 rounded-2xl border border-slate-100 dark:border-slate-800"

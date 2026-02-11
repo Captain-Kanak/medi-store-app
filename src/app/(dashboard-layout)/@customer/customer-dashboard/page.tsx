@@ -16,12 +16,20 @@ import Link from "next/link";
 export const dynamic = "force-dynamic";
 
 export default async function CustomerDashboard() {
-  const { data: metrics } = await orderService.getOrderMetrics();
+  const { data: metrics, error } = await orderService.getOrderMetrics();
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-red-500">{error.message}</p>
+      </div>
+    );
+  }
 
   const stats = [
     {
       title: "Total Orders",
-      value: metrics.totalOrders,
+      value: metrics?.totalOrders ?? 0,
       icon: ShoppingBag,
       description: "Complete order history",
       color: "text-blue-600",
@@ -29,7 +37,7 @@ export default async function CustomerDashboard() {
     },
     {
       title: "Total Spent",
-      value: `$${metrics.totalRevenue.toFixed(2)}`,
+      value: `$${metrics?.totalRevenue.toFixed(2) ?? 0}`,
       icon: Wallet,
       description: "Total successful purchases",
       color: "text-emerald-600",
@@ -37,7 +45,7 @@ export default async function CustomerDashboard() {
     },
     {
       title: "Active Orders",
-      value: metrics.pending + metrics.processing + metrics.shipped,
+      value: `${metrics?.pending + metrics?.processing + metrics?.shipped || 0}`,
       icon: Clock,
       description: "Pending, Packing & Shipped",
       color: "text-amber-600",
@@ -45,7 +53,7 @@ export default async function CustomerDashboard() {
     },
     {
       title: "Completed",
-      value: metrics.delivered,
+      value: metrics?.delivered ?? 0,
       icon: CheckCircle2,
       description: "Successfully delivered",
       color: "text-purple-600",
