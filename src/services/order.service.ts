@@ -37,6 +37,7 @@ export const orderService = {
           Cookie: cookieStore.toString(),
         },
         cache: "no-store",
+        credentials: "include",
       });
 
       if (!res.ok) {
@@ -81,6 +82,7 @@ export const orderService = {
           Cookie: cookieStore.toString(),
         },
         cache: "no-store",
+        credentials: "include",
       });
 
       if (!res.ok) {
@@ -122,6 +124,7 @@ export const orderService = {
           "Content-Type": "application/json",
           Cookie: cookieStore.toString(),
         },
+        credentials: "include",
         body: JSON.stringify(payload),
       });
 
@@ -164,6 +167,7 @@ export const orderService = {
           "Content-Type": "application/json",
           Cookie: cookieStore.toString(),
         },
+        credentials: "include",
         body: JSON.stringify({ status }),
       });
 
