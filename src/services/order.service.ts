@@ -22,6 +22,7 @@ export const orderService = {
   getOrders: async function (params?: GerOrdersParams) {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
       const url = new URL(`${API_URL}/api/orders`);
 
       if (params) {
@@ -34,10 +35,9 @@ export const orderService = {
 
       const res = await fetch(url.toString(), {
         headers: {
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
         cache: "no-store",
-        credentials: "include",
       });
 
       if (!res.ok) {
@@ -76,13 +76,13 @@ export const orderService = {
   getOrderMetrics: async function () {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/orders/metrics`, {
         headers: {
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
         cache: "no-store",
-        credentials: "include",
       });
 
       if (!res.ok) {
@@ -117,14 +117,14 @@ export const orderService = {
   createOrder: async function (payload: OrderPayload) {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         body: JSON.stringify(payload),
       });
 
@@ -160,14 +160,14 @@ export const orderService = {
   updateOrderStatus: async function (orderId: string, status: string) {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/orders/${orderId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         body: JSON.stringify({ status }),
       });
 

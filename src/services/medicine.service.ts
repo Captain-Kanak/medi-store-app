@@ -47,14 +47,14 @@ export const medicineService = {
   addMedicine: async (payload: CreateMedicineData) => {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/medicines`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         body: JSON.stringify(payload),
       });
 
@@ -151,6 +151,7 @@ export const medicineService = {
   ): Promise<ApiResponse<Medicine[]>> {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
       const url = new URL(`${API_URL}/api/medicines/seller`);
 
       if (params) {
@@ -163,9 +164,8 @@ export const medicineService = {
 
       const res = await fetch(url.toString(), {
         headers: {
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         cache: "no-store",
       });
 
@@ -241,14 +241,14 @@ export const medicineService = {
   updateMedicineById: async function (id: string, data: UpdateMedicineData) {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/medicines/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         body: JSON.stringify(data),
       });
 
@@ -284,13 +284,13 @@ export const medicineService = {
   deleteMedicineById: async function (id: string) {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/medicines/${id}`, {
         method: "DELETE",
         headers: {
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
       });
 
       if (!res.ok) {

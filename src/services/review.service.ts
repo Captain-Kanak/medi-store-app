@@ -13,14 +13,14 @@ export const reviewService = {
   createReview: async (payload: Review) => {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/reviews`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         body: JSON.stringify(payload),
       });
 

@@ -12,12 +12,12 @@ export const cartService = {
   getCartItems: async function () {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/carts`, {
         headers: {
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         cache: "no-store",
       });
 
@@ -53,14 +53,14 @@ export const cartService = {
   addToCart: async function (payload: CartItem) {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/carts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         body: JSON.stringify(payload),
       });
 
@@ -96,14 +96,14 @@ export const cartService = {
   updateCartItem: async function (payload: CartItem) {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/carts`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         body: JSON.stringify(payload),
       });
 
@@ -139,14 +139,14 @@ export const cartService = {
   deleteCartItem: async function (medicineId: string) {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/carts`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         body: JSON.stringify({ medicineId }),
       });
 

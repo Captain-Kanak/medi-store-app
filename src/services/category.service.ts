@@ -52,14 +52,14 @@ export const categoryService = {
   ): Promise<CategoryApiResponse<Category>> {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/categories`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         body: JSON.stringify({ name, description }),
       });
 
@@ -99,14 +99,14 @@ export const categoryService = {
   ) {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/categories/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         body: JSON.stringify({ name, description }),
       });
 
@@ -143,13 +143,13 @@ export const categoryService = {
   deleteCategory: async function (id: string) {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/categories/${id}`, {
         method: "DELETE",
         headers: {
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
       });
 
       if (!res.ok) {

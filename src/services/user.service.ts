@@ -14,12 +14,12 @@ export const userService = {
   getSession: async function () {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/auth/get-session`, {
         headers: {
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         cache: "no-store",
       });
 
@@ -48,12 +48,12 @@ export const userService = {
   getUsersMetrics: async function () {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/users/metrics`, {
         headers: {
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         cache: "no-store",
       });
 
@@ -89,14 +89,14 @@ export const userService = {
   updateProfile: async function (profileData: ProfileUpdatePayload) {
     try {
       const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
 
       const res = await fetch(`${API_URL}/api/users`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
-        credentials: "include",
         body: JSON.stringify(profileData),
       });
 
