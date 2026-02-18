@@ -1,11 +1,11 @@
 "use client";
 
-import { Pill } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Medicine } from "@/types";
 import Link from "next/link";
 import { Eye, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 export function MedicineCard({ medicine }: { medicine: Medicine }) {
   return (
@@ -15,10 +15,11 @@ export function MedicineCard({ medicine }: { medicine: Medicine }) {
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#3b82f6_1px,transparent_1px)]" />
 
         <div className="absolute inset-0 flex items-center justify-center">
-          <Pill
-            size={48}
-            strokeWidth={1}
-            className="text-slate-400 group-hover:text-blue-500 transition-colors"
+          <Image
+            src={medicine.image}
+            height={330}
+            width={330}
+            alt={medicine.name}
           />
         </div>
 

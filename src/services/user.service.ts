@@ -129,4 +129,45 @@ export const userService = {
       };
     }
   },
+  getUserData: async function () {
+    try {
+      const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
+
+      const res = await fetch(`${API_URL}/api/users`, {
+        headers: {
+          Cookie: cookieHeader,
+        },
+        cache: "no-store",
+      });
+
+      if (!res.ok) {
+        return {
+          data: null,
+          error: { message: "Failed to get user data" },
+        };
+      }
+
+      const result = await res.json();
+
+      if (!result.success) {
+        return {
+          data: null,
+          error: { message: result.message },
+        };
+      }
+
+      return {
+        data: result.data,
+        error: null,
+      };
+    } catch (error) {
+      console.error(error);
+
+      return {
+        data: null,
+        error: { message: "Failed to get user data" },
+      };
+    }
+  },
 };

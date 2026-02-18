@@ -27,7 +27,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import Image from "next/image";
 import { ModeToggle } from "./ModeToggle";
 import { authClient } from "@/lib/auth-client";
 import { useEffect, useState } from "react";
@@ -59,7 +58,6 @@ interface NavbarProps {
 }
 
 const Navbar = ({
-  logo = { url: "/", src: "/logo.png", alt: "logo", title: "MEDI STORE" },
   menu = [
     { title: "HOME", url: "/" },
     { title: "MEDICINES", url: "/medicines" },
@@ -234,7 +232,7 @@ const Navbar = ({
                 <Button
                   variant="outline"
                   size="icon"
-                  className="lg:hidden rounded-xl border-slate-200 dark:border-slate-800"
+                  className="lg:hidden rounded-xl border-slate-200 dark:border-slate-800 cursor-pointer"
                 >
                   <Menu className="size-5" />
                 </Button>
@@ -245,16 +243,7 @@ const Navbar = ({
               >
                 <SheetHeader className="p-6 text-left border-b border-slate-100 dark:border-slate-900">
                   <SheetTitle className="flex items-center gap-2">
-                    <Image
-                      src={logo.src}
-                      width={32}
-                      height={32}
-                      alt="logo"
-                      className="dark:invert"
-                    />
-                    <span className="font-black tracking-tight">
-                      {logo.title}
-                    </span>
+                    <Logo />
                   </SheetTitle>
                 </SheetHeader>
 
@@ -300,14 +289,16 @@ const Navbar = ({
                       Navigation
                     </p>
 
-                    <Link
-                      href="/cart"
-                      onClick={() => setIsOpen(false)}
-                      className="flex lg:hidden items-center justify-between p-3 rounded-xl font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50"
-                    >
-                      MY CART
-                      <ChevronRight className="h-4 w-4 opacity-20" />
-                    </Link>
+                    {user?.role === UserRoles.CUSTOMER && (
+                      <Link
+                        href="/cart"
+                        onClick={() => setIsOpen(false)}
+                        className="flex lg:hidden items-center justify-between p-3 rounded-xl font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50"
+                      >
+                        MY CART
+                        <ChevronRight className="h-4 w-4 opacity-20" />
+                      </Link>
+                    )}
 
                     {menu.map((item) => (
                       <Link
@@ -328,7 +319,7 @@ const Navbar = ({
                     <Button
                       onClick={handleLogout}
                       variant="destructive"
-                      className="w-full h-12 rounded-xl font-bold"
+                      className="w-full h-12 rounded-xl font-bold cursor-pointer"
                     >
                       <LogOut className="mr-2 h-4 w-4" /> Sign Out
                     </Button>

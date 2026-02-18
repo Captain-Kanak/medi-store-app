@@ -48,7 +48,12 @@ export default async function MedicineDetailsPage({
         <div className="lg:col-span-7 space-y-8">
           <div className="relative aspect-video overflow-hidden rounded-3xl border bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)]" />
-            <Pill size={120} strokeWidth={0.5} className="text-blue-500/50" />
+            <Image
+              src={medicine.image}
+              height={800}
+              width={800}
+              alt={medicine.name}
+            />
             <Badge className="absolute top-6 left-6 bg-blue-600 text-gray-200">
               Authentic Product
             </Badge>
@@ -115,7 +120,7 @@ export default async function MedicineDetailsPage({
                   Authorized Seller
                 </p>
                 <h4 className="text-lg font-bold text-slate-900 dark:text-white">
-                  Name: {medicine?.seller?.name}
+                  {medicine?.seller?.name}
                 </h4>
                 <p className="text-xs text-slate-500">
                   Email: {medicine?.seller?.email}

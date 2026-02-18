@@ -26,6 +26,7 @@ import {
 import { updateUserProfile } from "@/actions/user.action";
 import { uploadImageToImgBB } from "@/utils/imageUpload";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function ProfileDisplay({ user }: { user: any }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,6 +35,8 @@ export default function ProfileDisplay({ user }: { user: any }) {
   const [imagePreview, setImagePreview] = useState<string>(user?.image || "");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  console.log(user);
 
   const [formData, setFormData] = useState({
     name: user?.name || "",
@@ -81,6 +84,7 @@ export default function ProfileDisplay({ user }: { user: any }) {
         toast.success("Profile updated successfully!", { id: toastId });
         setIsOpen(false);
         setImageFile(null);
+        router.refresh();
       } else {
         throw new Error(error?.message || "Failed to update profile");
       }
@@ -101,8 +105,10 @@ export default function ProfileDisplay({ user }: { user: any }) {
           <div className="relative -mt-12 flex items-end justify-between mb-6">
             <div className="h-32 w-32 rounded-3xl border-4 border-white dark:border-slate-900 overflow-hidden bg-slate-100 shadow-xl">
               {user?.image ? (
-                <img
+                <Image
                   src={user.image}
+                  height={100}
+                  width={100}
                   alt={user.name}
                   className="h-full w-full object-cover"
                 />

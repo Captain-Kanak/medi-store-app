@@ -9,3 +9,7 @@ export async function getUserSession() {
 export async function updateUserProfile(payload: ProfileUpdatePayload) {
   return await userService.updateProfile(payload);
 }
+
+export async function getUserData() {
+  return await userService.getUserData();
+}

@@ -1,11 +1,16 @@
 import ProfileDisplay from "./ProfileDisplay";
 import { ShieldCheck, Calendar, Star } from "lucide-react";
-import { getUserSession } from "@/actions/user.action";
+import { getUserData } from "@/actions/user.action";
 import { User } from "@/types";
 
 export default async function UserProfile() {
-  const { data } = await getUserSession();
-  const user = data?.user as User;
+  const { data, error } = await getUserData();
+
+  if (error) {
+    return <div className="text-red-500 text-center mt-4">{error.message}</div>;
+  }
+
+  const user = data as User;
 
   return (
     <div className="space-y-6">
@@ -23,7 +28,7 @@ export default async function UserProfile() {
               Status
             </p>
             <p className="text-sm font-bold text-emerald-700 dark:text-emerald-400">
-              Verified User
+              VERIFIED {user?.role}
             </p>
           </div>
         </div>
@@ -37,7 +42,7 @@ export default async function UserProfile() {
               Joined
             </p>
             <p className="text-sm font-bold text-blue-700 dark:text-blue-400">
-              {new Date(user.createdAt).toLocaleDateString("en-US", {
+              {new Date(user?.createdAt).toLocaleDateString("en-US", {
                 month: "long",
                 day: "numeric",
                 year: "numeric",

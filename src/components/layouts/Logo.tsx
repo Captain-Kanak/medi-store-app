@@ -11,12 +11,12 @@ export default function Logo() {
     >
       <Image
         src={logo.src}
-        className="dark:invert w-8 h-8 md:w-10 md:h-10"
-        width={40}
-        height={40}
+        className="dark:invert"
+        width={32}
+        height={32}
         alt={logo.alt}
       />
-      <span className="text-xl font-black tracking-tighter bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+      <span className="text-lg font-black tracking-tighter bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
         {logo.title}
       </span>
     </Link>
