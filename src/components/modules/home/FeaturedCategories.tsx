@@ -28,7 +28,7 @@ export async function FeaturedCategories() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {categories?.slice(0, 6).map((category: any) => (
+          {categories?.slice(0, 12).map((category: any) => (
             <Link
               key={category.id}
               href={`/medicines?categoryId=${category.id}`}
