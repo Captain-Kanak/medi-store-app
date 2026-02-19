@@ -35,6 +35,7 @@ import { User, UserRoles } from "@/types";
 import { toast } from "sonner";
 import { CartBadge } from "../modules/cart/CartBadge";
 import Logo from "./Logo";
+import { usePathname } from "next/navigation";
 
 interface MenuItem {
   title: string;
@@ -73,6 +74,7 @@ const Navbar = ({
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
   const { data: session } = authClient.useSession();
   const user = session?.user as User | undefined;
   let dashboardLink = "";
@@ -91,9 +93,10 @@ const Navbar = ({
       dashboardLink = "/customer-dashboard";
   }
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const isActive = (url: string) => {
+    if (url === "/") return pathname === "/";
+    return pathname.startsWith(url);
+  };
 
   const handleLogout = async () => {
     await authClient.signOut({
@@ -107,6 +110,10 @@ const Navbar = ({
       },
     });
   };
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (!mounted) {
     return (
@@ -134,7 +141,12 @@ const Navbar = ({
                     <NavigationMenuItem key={item.title}>
                       <NavigationMenuLink
                         asChild
-                        className="group inline-flex h-9 w-max items-center justify-center rounded-full px-4 py-2 text-sm font-bold text-slate-600 transition-colors hover:bg-blue-50 hover:text-blue-600 dark:text-slate-400 dark:hover:bg-blue-900/20 dark:hover:text-blue-400"
+                        className={cn(
+                          "group inline-flex h-9 w-max items-center justify-center rounded-full px-4 py-2 text-sm font-bold transition-colors",
+                          isActive(item.url)
+                            ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
+                            : "text-slate-600 hover:bg-blue-50 hover:text-blue-600 dark:text-slate-400 dark:hover:bg-blue-900/20 dark:hover:text-blue-400",
+                        )}
                       >
                         <Link href={item.url}>{item.title}</Link>
                       </NavigationMenuLink>
