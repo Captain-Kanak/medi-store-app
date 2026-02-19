@@ -17,7 +17,7 @@ import {
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
-import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export function NavUser({ user }: { user: any }) {
   const router = useRouter();
@@ -43,13 +43,12 @@ export function NavUser({ user }: { user: any }) {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground rounded-xl cursor-pointer"
             >
-              <Image
-                src={user.image}
-                width={32}
-                height={32}
-                alt={user.name}
-                className="rounded-md"
-              />
+              <Avatar className="h-8 w-8 border-2 border-white dark:border-slate-800 shadow-sm">
+                <AvatarImage src={user.image || ""} />
+                <AvatarFallback className="bg-blue-600 text-white font-bold">
+                  {user.name?.charAt(0)}
+                </AvatarFallback>
+              </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>
                 <span className="truncate text-xs text-slate-500">
@@ -67,13 +66,12 @@ export function NavUser({ user }: { user: any }) {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Image
-                  src={user.image}
-                  width={32}
-                  height={32}
-                  alt={user.name}
-                  className="rounded-md"
-                />
+                <Avatar className="h-8 w-8 border-2 border-white dark:border-slate-800 shadow-sm">
+                  <AvatarImage src={user.image || ""} />
+                  <AvatarFallback className="bg-blue-600 text-white font-bold">
+                    {user.name?.charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{user.name}</span>
                   <span className="truncate text-xs text-slate-500">
