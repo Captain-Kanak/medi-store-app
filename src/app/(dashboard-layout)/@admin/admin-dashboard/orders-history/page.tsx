@@ -11,6 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Package, User, Store, Calendar, CreditCard } from "lucide-react";
 import { OrderStatus } from "@/types/order.type";
+import { MedicinePagination } from "@/components/modules/medicines/MedicinePagination";
 
 export const dynamic = "force-dynamic";
 
@@ -160,12 +161,7 @@ export default async function AdminOrdersHistoryPage({
         )}
       </div>
 
-      <div className="flex justify-center pt-4">
-        <OrderPagination
-          totalPages={pagination.totalPages}
-          currentPage={pagination.currentPage}
-        />
-      </div>
+      <MedicinePagination pagination={pagination} />
     </div>
   );
 }

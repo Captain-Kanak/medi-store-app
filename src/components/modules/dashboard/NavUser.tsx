@@ -1,10 +1,9 @@
 "use client";
 
-import { LogOut, UserCircle, Settings, ChevronsUpDown } from "lucide-react";
+import { LogOut, ChevronsUpDown } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -15,10 +14,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
+import Image from "next/image";
 
 export function NavUser({ user }: { user: any }) {
   const router = useRouter();
@@ -44,12 +43,13 @@ export function NavUser({ user }: { user: any }) {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground rounded-xl cursor-pointer"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.image} alt={user.name} />
-                <AvatarFallback className="rounded-lg bg-blue-600 text-white font-bold">
-                  {user.name?.charAt(0).toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
+              <Image
+                src={user.image}
+                width={32}
+                height={32}
+                alt={user.name}
+                className="rounded-md"
+              />
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>
                 <span className="truncate text-xs text-slate-500">
@@ -67,11 +67,13 @@ export function NavUser({ user }: { user: any }) {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarFallback className="rounded-lg bg-blue-100 text-blue-700 font-bold">
-                    {user.name?.charAt(0).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
+                <Image
+                  src={user.image}
+                  width={32}
+                  height={32}
+                  alt={user.name}
+                  className="rounded-md"
+                />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{user.name}</span>
                   <span className="truncate text-xs text-slate-500">
@@ -80,17 +82,6 @@ export function NavUser({ user }: { user: any }) {
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            {/* <DropdownMenuGroup>
-              <DropdownMenuItem className="cursor-pointer">
-                <UserCircle className="mr-2 h-4 w-4 text-slate-500" />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
-                <Settings className="mr-2 h-4 w-4 text-slate-500" />
-                Settings
-              </DropdownMenuItem>
-            </DropdownMenuGroup> */}
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={handleLogout}

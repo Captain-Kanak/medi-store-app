@@ -4,8 +4,8 @@ import { ShoppingBag, Package, Calendar } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { UserOrderActions } from "@/components/modules/order/UserOrderActions";
-import { OrderPagination } from "@/components/modules/order/OrderPagination";
 import { MedicineReviewModal } from "@/components/modules/medicines/MedicineReviewModal";
+import { MedicinePagination } from "@/components/modules/medicines/MedicinePagination";
 
 export const dynamic = "force-dynamic";
 
@@ -154,10 +154,7 @@ export default async function CustomerOrdersPage({
         ))}
       </div>
 
-      <OrderPagination
-        totalPages={pagination?.totalPage || 0}
-        currentPage={Number(currentPage)}
-      />
+      <MedicinePagination pagination={pagination} />
     </div>
   );
 }

@@ -31,8 +31,10 @@ export function MedicinePagination({ pagination }: { pagination: any }) {
       <PaginationContent className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-1 rounded-2xl">
         <PaginationItem>
           <PaginationPrevious
-            href={createPageURL(currentPage - 1)}
-            className={currentPage <= 1 ? "pointer-events-none opacity-40" : ""}
+            href={createPageURL(Number(currentPage) - 1)}
+            className={
+              Number(currentPage) <= 1 ? "pointer-events-none opacity-40" : ""
+            }
           />
         </PaginationItem>
 
@@ -40,16 +42,16 @@ export function MedicinePagination({ pagination }: { pagination: any }) {
           if (
             page === 1 ||
             page === totalPage ||
-            (page >= currentPage - 1 && page <= currentPage + 1)
+            (page >= Number(currentPage) - 1 && page <= Number(currentPage) + 1)
           ) {
             return (
               <PaginationItem key={page}>
                 <PaginationLink
                   href={createPageURL(page)}
-                  isActive={currentPage === page}
+                  isActive={Number(currentPage) === page}
                   className={cn(
                     "rounded-xl",
-                    currentPage === page &&
+                    Number(currentPage) === page &&
                       "bg-blue-600 text-white hover:bg-blue-700 hover:text-white",
                   )}
                 >
@@ -58,7 +60,10 @@ export function MedicinePagination({ pagination }: { pagination: any }) {
               </PaginationItem>
             );
           }
-          if (page === currentPage - 2 || page === currentPage + 2) {
+          if (
+            page === Number(currentPage) - 2 ||
+            page === Number(currentPage) + 2
+          ) {
             return (
               <PaginationItem key={page}>
                 <PaginationEllipsis />
@@ -70,9 +75,11 @@ export function MedicinePagination({ pagination }: { pagination: any }) {
 
         <PaginationItem>
           <PaginationNext
-            href={createPageURL(currentPage + 1)}
+            href={createPageURL(Number(currentPage) + 1)}
             className={
-              currentPage >= totalPage ? "pointer-events-none opacity-40" : ""
+              Number(currentPage) >= totalPage
+                ? "pointer-events-none opacity-40"
+                : ""
             }
           />
         </PaginationItem>

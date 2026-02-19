@@ -8,10 +8,6 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "i.ibb.co",
       },
-      {
-        protocol: "https",
-        hostname: "images.example.com",
-      },
     ],
   },
   async rewrites() {

@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Package, User, CheckCircle } from "lucide-react";
 import { OrderStatusUpdater } from "@/components/modules/seller/OrderStatusUpdater";
 import { OrderStatus } from "@/types";
-import { OrderPagination } from "@/components/modules/order/OrderPagination";
+import { MedicinePagination } from "@/components/modules/medicines/MedicinePagination";
 
 export const dynamic = "force-dynamic";
 
@@ -152,10 +152,7 @@ export default async function SellerManageOrdersPage({
         )}
       </div>
 
-      <OrderPagination
-        totalPages={pagination.totalPages}
-        currentPage={currentPage}
-      />
+      <MedicinePagination pagination={pagination} />
     </div>
   );
 }

@@ -12,6 +12,8 @@ import { MedicineSearch } from "@/components/modules/medicines/MedicineSearch";
 import { MedicineSort } from "@/components/modules/medicines/MedicineSort";
 import MedicineSidebar from "@/components/modules/medicines/MedicineSidebar";
 import { getCategories } from "@/actions/category.action";
+import { Suspense } from "react";
+import MedicineListSkeleton from "@/components/ui/MedicineCardSkeleton";
 
 export const dynamic = "force-dynamic";
 
@@ -80,21 +82,23 @@ export default async function MedicinesPage({
 
         {/* Results Area */}
         <div className="flex-1 space-y-12">
-          {medicines?.length > 0 ? (
-            <>
-              <MedicineList initialMedicines={medicines} />
-              <MedicinePagination pagination={pagination} />
-            </>
-          ) : (
-            <div className="flex flex-col gap-2 items-center justify-center py-20 text-center border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-3xl">
-              <p className="text-slate-500 font-medium">
-                No medicines found for the search result.
-              </p>
-              <Button variant="outline" asChild className="cursor-pointer">
-                <Link href="/medicines">Clear all filters</Link>
-              </Button>
-            </div>
-          )}
+          <Suspense fallback={<MedicineListSkeleton />}>
+            {medicines?.length > 0 ? (
+              <>
+                <MedicineList initialMedicines={medicines} />
+                <MedicinePagination pagination={pagination} />
+              </>
+            ) : (
+              <div className="flex flex-col gap-2 items-center justify-center py-20 text-center border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-3xl">
+                <p className="text-slate-500 font-medium">
+                  No medicines found for the search result.
+                </p>
+                <Button variant="outline" asChild className="cursor-pointer">
+                  <Link href="/medicines">Clear all filters</Link>
+                </Button>
+              </div>
+            )}
+          </Suspense>
         </div>
       </div>
     </div>

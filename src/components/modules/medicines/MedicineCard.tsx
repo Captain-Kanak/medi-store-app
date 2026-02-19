@@ -24,7 +24,7 @@ export function MedicineCard({ medicine }: { medicine: Medicine }) {
         </div>
 
         <div className="absolute top-3 left-3">
-          <Badge className="bg-white/80 backdrop-blur-md text-blue-600 border-none shadow-sm">
+          <Badge className="bg-white/80 backdrop-blur-md text-blue-600 border-none shadow-sm uppercase">
             {medicine.brand}
           </Badge>
         </div>

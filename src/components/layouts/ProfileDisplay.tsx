@@ -36,8 +36,6 @@ export default function ProfileDisplay({ user }: { user: any }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
-  console.log(user);
-
   const [formData, setFormData] = useState({
     name: user?.name || "",
     phone: user?.phone || "",

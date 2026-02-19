@@ -30,11 +30,11 @@ export function OrderPagination({
       {/* Previous Button */}
       <Button
         variant="outline"
-        onClick={() => handlePageChange(currentPage - 1)}
-        disabled={currentPage <= 1}
+        onClick={() => handlePageChange(Number(currentPage) - 1)}
+        disabled={Number(currentPage) <= 1}
         className={cn(
           "flex items-center gap-1 px-4 py-2 rounded-xl font-bold transition-all border-2 cursor-pointer shadow-sm",
-          currentPage <= 1
+          Number(currentPage) <= 1
             ? "opacity-50 cursor-not-allowed border-slate-200 text-slate-400 dark:border-slate-800"
             : "border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-blue-600 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800 active:scale-95",
         )}
@@ -47,11 +47,11 @@ export function OrderPagination({
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
           <Button
             key={page}
-            variant={currentPage === page ? "default" : "ghost"}
+            variant={Number(currentPage) === page ? "default" : "ghost"}
             onClick={() => handlePageChange(page)}
             className={cn(
               "h-10 w-10 flex items-center justify-center rounded-xl font-black transition-all cursor-pointer",
-              currentPage === page
+              Number(currentPage) === page
                 ? "bg-blue-600 text-white shadow-lg shadow-blue-200 dark:shadow-blue-900/20 hover:bg-blue-700"
                 : "text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 hover:text-blue-600",
             )}
@@ -64,11 +64,11 @@ export function OrderPagination({
       {/* Next Button */}
       <Button
         variant="outline"
-        onClick={() => handlePageChange(currentPage + 1)}
-        disabled={currentPage >= totalPages}
+        onClick={() => handlePageChange(Number(currentPage) + 1)}
+        disabled={Number(currentPage) >= totalPages}
         className={cn(
           "flex items-center gap-1 px-4 py-2 rounded-xl font-bold transition-all border-2 cursor-pointer shadow-sm",
-          currentPage >= totalPages
+          Number(currentPage) >= totalPages
             ? "opacity-50 cursor-not-allowed border-slate-200 text-slate-400 dark:border-slate-800"
             : "border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-blue-600 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800 active:scale-95",
         )}
