@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Logo() {
-  const logo = { url: "/", src: "/logo.png", alt: "logo", title: "MEDI STORE" };
+  const logo = { url: "/", src: "/logo.png", alt: "logo", title: "MEDI-STORE" };
 
   return (
     <Link

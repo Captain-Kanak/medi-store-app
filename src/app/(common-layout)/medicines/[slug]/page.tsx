@@ -108,6 +108,8 @@ export default async function MedicineDetailsPage({
                 {medicine?.seller?.image ? (
                   <Image
                     src={medicine.seller.image}
+                    height={56}
+                    width={56}
                     alt={medicine.seller.name}
                     className="rounded-2xl h-full w-full object-cover"
                   />

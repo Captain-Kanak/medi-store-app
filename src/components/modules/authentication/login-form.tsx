@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
@@ -41,6 +42,10 @@ const loginFormSchema = z.object({
 export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
   const [isUploading, setIsUploading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const searchParams = useSearchParams();
+
+  const callbackUrl =
+    searchParams.get("callbackUrl") || env.NEXT_PUBLIC_APP_URL;
 
   const form = useForm({
     defaultValues: {
@@ -56,7 +61,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
           email: value.email,
           password: value.password,
           rememberMe: true,
-          callbackURL: `${env.NEXT_PUBLIC_APP_URL}`,
+          callbackURL: callbackUrl,
         });
 
         if (error) {
@@ -78,7 +83,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
     try {
       const data = await authClient.signIn.social({
         provider: "google",
-        callbackURL: `${env.NEXT_PUBLIC_APP_URL}/?auth_google=true`,
+        callbackURL: `${callbackUrl}/?auth_google=true`,
       });
 
       if (!data) {

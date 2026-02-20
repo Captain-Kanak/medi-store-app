@@ -1,4 +1,3 @@
-import { AuthToastListener } from "@/components/modules/authentication/AuthToastListener";
 import BannerSection from "@/components/modules/home/BannerSection";
 import { FeaturedCategories } from "@/components/modules/home/FeaturedCategories";
 import { FeaturedMedicines } from "@/components/modules/home/FeaturedMedicines";
@@ -9,8 +8,6 @@ export const dynamic = "force-dynamic";
 export default function Home() {
   return (
     <div className="space-y-0 mt-8">
-      <AuthToastListener />
-
       <BannerSection />
       <FeaturedCategories />
       <FeaturedMedicines />

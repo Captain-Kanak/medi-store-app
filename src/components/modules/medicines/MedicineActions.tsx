@@ -24,7 +24,10 @@ export default function MedicineActions({ medicine }: { medicine: Medicine }) {
         description: "Please log in to add items to your cart or place orders.",
         action: {
           label: "Login",
-          onClick: () => router.push("/login"),
+          onClick: () =>
+            router.push(
+              `/login?callbackUrl=${encodeURIComponent(window.location.pathname)}`,
+            ),
         },
       });
       return;
